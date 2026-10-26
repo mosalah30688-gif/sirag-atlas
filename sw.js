@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sirag-atlas-stage-7';
+const CACHE_NAME = 'sirag-atlas-stage-8';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,12 +7,14 @@ const CORE_ASSETS = [
   './manifest.json',
   './js/audio.js',
   './js/data/seerah-events.js',
+  './js/data/hijrah-quiz.js',
   './js/data/battles.js',
   './js/data/scenarios.js',
   './js/data/companions.js',
   './js/data/lineage.js',
   './js/data/relics.js',
   './js/atlas.js',
+  './js/hijrah-quiz.js',
   './js/battles.js',
   './js/scenarios.js',
   './js/constellation.js',
@@ -37,7 +39,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Network-First strategy so every live stage update appears immediately on preview!
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(

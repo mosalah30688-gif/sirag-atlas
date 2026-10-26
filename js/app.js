@@ -82,6 +82,7 @@
       this.bindAudioToggle();
 
       window.SiragAtlas?.init();
+      window.SiragHijrahQuiz?.init();
       window.SiragBattles?.init();
       window.SiragScenarios?.init();
       window.SiragConstellation?.init();
@@ -108,6 +109,7 @@
       // Stop background autoplays when switching tabs
       if (viewName !== 'atlas') window.SiragAtlas?.stopAutoPlay();
       if (viewName !== 'battles') window.SiragBattles?.stopPlay();
+      if (viewName !== 'hijrah') window.SiragHijrahQuiz?.stopHijrahAuto();
 
       document.querySelectorAll('.view-section').forEach((sec) => {
         sec.classList.toggle('active', sec.id === `view-${viewName}`);

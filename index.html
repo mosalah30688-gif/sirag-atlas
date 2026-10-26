@@ -25,9 +25,10 @@
 
     <nav class="main-nav" aria-label="التنقل الرئيسي">
       <button class="nav-tab active" data-view="atlas">🗺️ الأطلس الحي</button>
-      <button class="nav-tab" data-view="battles">⚔️ محاكي الغزوات</button>
+      <button class="nav-tab" data-view="hijrah">🐪 الهجرة والفرسان</button>
+      <button class="nav-tab" data-view="battles">⚔️ الغزوات</button>
       <button class="nav-tab" data-view="scenarios">🧭 لو كنتَ يومئذٍ</button>
-      <button class="nav-tab" data-view="constellation">✨ مجرّة الصحابة</button>
+      <button class="nav-tab" data-view="constellation">✨ الصحابة</button>
       <button class="nav-tab" data-view="lineage">🌿 النسب والشمائل</button>
       <button class="nav-tab" data-view="museum">📜 المتحف 3D</button>
     </nav>
@@ -112,6 +113,21 @@
           <!-- Populated dynamically by js/atlas.js -->
         </div>
       </div>
+    </section>
+
+    <!-- VIEW 2B: HIJRAH DAY-BY-DAY & SEERAH KNIGHTS ARENA (STAGE 8) -->
+    <section id="view-hijrah" class="view-section">
+      <div class="section-head">
+        <div>
+          <h2>رحلة الهجرة السرية يوماً بيوم وميدان فرسان السيرة</h2>
+          <p>تتبّع مسار الـ 480 كم السري من مكة إلى قباء مع أدوار خلية الهجرة، ثم اختبر حصيلتك في ميدان الفرسان واجمع الأوسمة الذهبية.</p>
+        </div>
+        <div class="filter-pills" id="hijrah-quiz-subtabs">
+          <button class="pill-btn active" data-hqmode="hijrah">🐪 مسار الهجرة يوماً بيوم (480 كم)</button>
+          <button class="pill-btn" data-hqmode="quiz">🏆 ميدان فرسان السيرة (12 تحدياً)</button>
+        </div>
+      </div>
+      <div id="hijrah-quiz-stage"></div>
     </section>
 
     <!-- VIEW 2: TACTICAL BATTLE SIMULATOR -->
@@ -207,6 +223,7 @@
   <!-- Mobile Bottom Dock -->
   <nav class="mobile-dock" aria-label="التنقل السريع للهاتف">
     <button class="dock-btn active" data-view="atlas"><span>🗺️</span><span>الأطلس</span></button>
+    <button class="dock-btn" data-view="hijrah"><span>🐪</span><span>الهجرة</span></button>
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
     <button class="dock-btn" data-view="scenarios"><span>🧭</span><span>المعايشة</span></button>
     <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
@@ -222,12 +239,14 @@
   <!-- Scripts -->
   <script src="js/audio.js"></script>
   <script src="js/data/seerah-events.js"></script>
+  <script src="js/data/hijrah-quiz.js"></script>
   <script src="js/data/battles.js"></script>
   <script src="js/data/scenarios.js"></script>
   <script src="js/data/companions.js"></script>
   <script src="js/data/lineage.js"></script>
   <script src="js/data/relics.js"></script>
   <script src="js/atlas.js"></script>
+  <script src="js/hijrah-quiz.js"></script>
   <script src="js/battles.js"></script>
   <script src="js/scenarios.js"></script>
   <script src="js/constellation.js"></script>
