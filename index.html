@@ -33,6 +33,7 @@
       <button class="nav-tab" data-view="lineage">🌿 النسب</button>
       <button class="nav-tab" data-view="guidance">💎 الهدي</button>
       <button class="nav-tab" data-view="museum">📜 المتحف</button>
+      <button class="nav-tab" data-view="khatmah">🏅 الختمة والشهادة</button>
     </nav>
 
     <div class="header-actions">
@@ -267,6 +268,21 @@
       </div>
       <div class="museum-grid" id="museum-grid"></div>
     </section>
+
+    <!-- VIEW 8: 30-DAY KHATMAH & PERSONALIZED GOLDEN CERTIFICATE (STAGE 12) -->
+    <section id="view-khatmah" class="view-section">
+      <div class="section-head">
+        <div>
+          <h2>ختمة السيرة في 30 مجلساً وإجازة الاستكشاف المذهّبة</h2>
+          <p>برنامج منهجي متكامل لختم السيرة النبوية في شهر واحد مع استخراج وثيقتك الذهبية المذيلة باسمك الكريم وتاريخ اليوم الهجري.</p>
+        </div>
+        <div class="filter-pills" id="khatmah-subtabs">
+          <button class="pill-btn active" data-kmode="khatmah">📅 خطة الـ 30 مجلساً</button>
+          <button class="pill-btn" data-kmode="cert">🎓 إصدار الشهادة باسمك</button>
+        </div>
+      </div>
+      <div id="khatmah-cert-stage"></div>
+    </section>
   </main>
 
   <!-- Mobile Bottom Dock -->
@@ -276,8 +292,7 @@
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
     <button class="dock-btn" data-view="sanctuaries"><span>🕌</span><span>الحرمان</span></button>
     <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
-    <button class="dock-btn" data-view="guidance"><span>💎</span><span>الهدي</span></button>
-    <button class="dock-btn" data-view="museum"><span>📜</span><span>المتحف</span></button>
+    <button class="dock-btn" data-view="khatmah"><span>🏅</span><span>الختمة</span></button>
   </nav>
 
   <!-- Modal for Detailed Document Inspection -->
@@ -296,6 +311,7 @@
   <script src="js/data/lineage.js"></script>
   <script src="js/data/guidance.js"></script>
   <script src="js/data/relics.js"></script>
+  <script src="js/data/khatmah.js"></script>
   <script src="js/atlas.js"></script>
   <script src="js/hijrah-quiz.js"></script>
   <script src="js/battles.js"></script>
@@ -306,6 +322,7 @@
   <script src="js/guidance-search.js"></script>
   <script src="js/museum.js"></script>
   <script src="js/poster.js"></script>
+  <script src="js/khatmah-cert.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

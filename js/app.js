@@ -90,6 +90,7 @@
       window.SiragLineage?.init();
       window.SiragOmni?.init();
       window.SiragMuseum?.init();
+      window.SiragKhatmah?.init();
 
       window.SiragTracker.renderScore();
       this.registerPWA();
