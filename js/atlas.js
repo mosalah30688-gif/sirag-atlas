@@ -379,9 +379,14 @@
             <h3 class="inspector-title">${ev.title}</h3>
             <p style="font-size:0.83rem; color:var(--text-secondary); margin-top:4px;">📍 ${ev.locationName}</p>
           </div>
-          <button class="btn-outline" id="open-golden-poster-btn" title="توليد وتحميل بطاقة ذهبية عالية الدقة لهذا الموقف" style="white-space:nowrap; font-size:0.78rem; padding:7px 12px;">
-            🖼️ بطاقة ذهبية
-          </button>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button class="btn-outline ${window.SiragOmni?.isBookmarked(ev.id) ? 'active' : ''}" id="toggle-bookmark-btn" title="حفظ المحطة في مفضلتي" style="font-size:0.78rem; padding:7px 10px;">
+              ${window.SiragOmni?.isBookmarked(ev.id) ? '🔖 محفوظة' : '🔖 حفظ'}
+            </button>
+            <button class="btn-outline" id="open-golden-poster-btn" title="توليد وتحميل بطاقة ذهبية عالية الدقة لهذا الموقف" style="white-space:nowrap; font-size:0.78rem; padding:7px 11px;">
+              🖼️ بطاقة ذهبية
+            </button>
+          </div>
         </div>
 
         <!-- 3 Reading Depth Switcher -->
@@ -465,6 +470,12 @@
         this.quranAudio.onended = () => {
           btn.textContent = '🔊 استمع للآية';
         };
+      });
+
+      document.getElementById('toggle-bookmark-btn')?.addEventListener('click', () => {
+        if (window.SiragAudio) window.SiragAudio.playClick(600);
+        window.SiragOmni?.toggleBookmark(ev.id);
+        this.renderInspector(ev);
       });
 
       document.getElementById('open-golden-poster-btn')?.addEventListener('click', () => {
