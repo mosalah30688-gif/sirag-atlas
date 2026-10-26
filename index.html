@@ -28,7 +28,8 @@
       <button class="nav-tab" data-view="battles">⚔️ محاكي الغزوات</button>
       <button class="nav-tab" data-view="scenarios">🧭 لو كنتَ يومئذٍ</button>
       <button class="nav-tab" data-view="constellation">✨ مجرّة الصحابة</button>
-      <button class="nav-tab" data-view="museum">📜 المتحف النبوي 3D</button>
+      <button class="nav-tab" data-view="lineage">🌿 النسب والشمائل</button>
+      <button class="nav-tab" data-view="museum">📜 المتحف 3D</button>
     </nav>
 
     <div class="header-actions">
@@ -175,7 +176,23 @@
       </div>
     </section>
 
-    <!-- VIEW 5: 3D PROPHETIC MUSEUM -->
+    <!-- VIEW 5: PROPHETIC LINEAGE & SHAMA'IL (STAGE 7) -->
+    <section id="view-lineage" class="view-section">
+      <div class="section-head">
+        <div>
+          <h2>عمود النسب المطهّر، البيت النبوي، وساعة الشمائل اليومية</h2>
+          <p>استكشف الشجرة الذهبية للنسب النبوي الشريف وتلاقي أنساب الصحابة معها، وأبناء وبنات النبي ﷺ، وكيف كان يقضي يومه المبارك.</p>
+        </div>
+        <div class="filter-pills" id="lineage-subtabs">
+          <button class="pill-btn active" data-submode="tree">🌿 عمود النسب الشريف</button>
+          <button class="pill-btn" data-submode="household">🏡 أبناء وبنات النبي ﷺ</button>
+          <button class="pill-btn" data-submode="shamail">🕰️ يوم في حياة النبي ﷺ</button>
+        </div>
+      </div>
+      <div id="lineage-dynamic-stage"></div>
+    </section>
+
+    <!-- VIEW 6: 3D PROPHETIC MUSEUM -->
     <section id="view-museum" class="view-section">
       <div class="section-head">
         <div>
@@ -193,6 +210,7 @@
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
     <button class="dock-btn" data-view="scenarios"><span>🧭</span><span>المعايشة</span></button>
     <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
+    <button class="dock-btn" data-view="lineage"><span>🌿</span><span>النسب</span></button>
     <button class="dock-btn" data-view="museum"><span>📜</span><span>المتحف</span></button>
   </nav>
 
@@ -207,11 +225,13 @@
   <script src="js/data/battles.js"></script>
   <script src="js/data/scenarios.js"></script>
   <script src="js/data/companions.js"></script>
+  <script src="js/data/lineage.js"></script>
   <script src="js/data/relics.js"></script>
   <script src="js/atlas.js"></script>
   <script src="js/battles.js"></script>
   <script src="js/scenarios.js"></script>
   <script src="js/constellation.js"></script>
+  <script src="js/lineage.js"></script>
   <script src="js/museum.js"></script>
   <script src="js/app.js"></script>
 </body>

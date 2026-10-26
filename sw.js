@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sirag-atlas-v1';
+const CACHE_NAME = 'sirag-atlas-stage-7';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -10,11 +10,13 @@ const CORE_ASSETS = [
   './js/data/battles.js',
   './js/data/scenarios.js',
   './js/data/companions.js',
+  './js/data/lineage.js',
   './js/data/relics.js',
   './js/atlas.js',
   './js/battles.js',
   './js/scenarios.js',
   './js/constellation.js',
+  './js/lineage.js',
   './js/museum.js',
   './js/app.js'
 ];
@@ -35,20 +37,18 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Network-First strategy so every live stage update appears immediately on preview!
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const networkFetch = fetch(event.request)
-        .then((res) => {
-          if (res && res.status === 200 && res.type === 'basic') {
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return res;
-        })
-        .catch(() => cached);
-      return cached || networkFetch;
-    })
+    fetch(event.request)
+      .then((res) => {
+        if (res && res.status === 200 && res.type === 'basic') {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return res;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

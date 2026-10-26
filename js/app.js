@@ -85,6 +85,7 @@
       window.SiragBattles?.init();
       window.SiragScenarios?.init();
       window.SiragConstellation?.init();
+      window.SiragLineage?.init();
       window.SiragMuseum?.init();
 
       window.SiragTracker.renderScore();
