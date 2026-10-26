@@ -233,6 +233,18 @@
         }
       });
 
+      (window.SEERAH_DIWAN_LEXICON?.poems || []).forEach((p) => {
+        if (p.title.includes(q) || p.poet.includes(q) || p.verses.some((v) => v.sadr.includes(q) || v.ajuz.includes(q))) {
+          hits.push({ type: 'poem', id: p.id, badge: '🎙️ ديوان مسموع', title: p.title, sub: p.poet });
+        }
+      });
+
+      (window.SEERAH_DIWAN_LEXICON?.lexicon || []).forEach((lx) => {
+        if (lx.term.includes(q) || lx.vocalized.includes(q) || lx.meaning.includes(q)) {
+          hits.push({ type: 'lexicon', id: lx.term, badge: '📖 معجم السيرة', title: lx.vocalized, sub: lx.meaning.slice(0, 75) + '...' });
+        }
+      });
+
       if (!hits.length) {
         box.innerHTML = `<p style="font-size:0.86rem; color:var(--amber-warn);">لا توجد نتائج مطابقة لـ «${q}» — جرّب كلمة مثل: بدر، الهجرة، خديجة، الرفق، هرقل، العلق.</p>`;
         return;
@@ -276,6 +288,24 @@
         setTimeout(() => window.SiragMuseum?.openRelicModal(id), 120);
       } else if (type === 'guidance') {
         window.SiragApp?.switchView('guidance');
+      } else if (type === 'poem') {
+        window.SiragApp?.switchView('diwan');
+        if (window.SiragDiwanLexicon) {
+          window.SiragDiwanLexicon.subMode = 'diwan';
+          const found = window.SiragDiwanLexicon.data.poems.find((x) => x.id === id);
+          if (found) window.SiragDiwanLexicon.currentPoem = found;
+          window.SiragDiwanLexicon.render();
+        }
+      } else if (type === 'lexicon') {
+        window.SiragApp?.switchView('diwan');
+        if (window.SiragDiwanLexicon) {
+          window.SiragDiwanLexicon.subMode = 'lexicon';
+          window.SiragDiwanLexicon.lexQuery = id;
+          document.querySelectorAll('#diwan-lex-subtabs .pill-btn').forEach((b) => {
+            b.classList.toggle('active', b.getAttribute('data-dlmode') === 'lexicon');
+          });
+          window.SiragDiwanLexicon.render();
+        }
       }
     }
   }

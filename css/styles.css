@@ -1105,3 +1105,8 @@ body.theme-parchment .relic-manuscript {
 body.theme-parchment .relic-card {
   background: linear-gradient(155deg, #fffdf7, #efe3c8);
 }
+
+body.theme-parchment .poem-couplet {
+  background: rgba(247, 239, 223, 0.92) !important;
+  color: #18120a !important;
+}

@@ -31,6 +31,7 @@
       <button class="nav-tab" data-view="scenarios">🧭 المعايشة</button>
       <button class="nav-tab" data-view="constellation">✨ الصحابة</button>
       <button class="nav-tab" data-view="lineage">🌿 النسب</button>
+      <button class="nav-tab" data-view="diwan">🎙️ الديوان والمعجم</button>
       <button class="nav-tab" data-view="guidance">💎 الهدي</button>
       <button class="nav-tab" data-view="museum">📜 المتحف</button>
       <button class="nav-tab" data-view="khatmah">🏅 الختمة والشهادة</button>
@@ -237,6 +238,21 @@
       <div id="lineage-dynamic-stage"></div>
     </section>
 
+    <!-- VIEW 5B: SAHABA AUDIO DIWAN & SEERAH LEXICON (STAGE 13) -->
+    <section id="view-diwan" class="view-section">
+      <div class="section-head">
+        <div>
+          <h2>ديوان القصائد الصحابية المسموع ومعجم الأماكن والغريب</h2>
+          <p>استمع لإلقاء عربي فصيح (بدون موسيقى) لأروع القصائد الموثقة في حضرة النبي ﷺ مع تظليل متزامن للأبيات، واستكشف معجم مواضع وألفاظ السيرة.</p>
+        </div>
+        <div class="filter-pills" id="diwan-lex-subtabs">
+          <button class="pill-btn active" data-dlmode="diwan">🎙️ ديوان القصائد الصحابية (صوتي)</button>
+          <button class="pill-btn" data-dlmode="lexicon">📖 معجم الأماكن وغريب السيرة (18)</button>
+        </div>
+      </div>
+      <div id="diwan-lexicon-stage"></div>
+    </section>
+
     <!-- VIEW 6: PRACTICAL PROPHETIC GUIDANCE (STAGE 10) -->
     <section id="view-guidance" class="view-section">
       <div class="section-head">
@@ -290,7 +306,7 @@
     <button class="dock-btn active" data-view="atlas"><span>🗺️</span><span>الأطلس</span></button>
     <button class="dock-btn" data-view="hijrah"><span>🐪</span><span>الهجرة</span></button>
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
-    <button class="dock-btn" data-view="sanctuaries"><span>🕌</span><span>الحرمان</span></button>
+    <button class="dock-btn" data-view="diwan"><span>🎙️</span><span>الديوان</span></button>
     <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
     <button class="dock-btn" data-view="khatmah"><span>🏅</span><span>الختمة</span></button>
   </nav>
@@ -309,6 +325,7 @@
   <script src="js/data/scenarios.js"></script>
   <script src="js/data/companions.js"></script>
   <script src="js/data/lineage.js"></script>
+  <script src="js/data/poems-lexicon.js"></script>
   <script src="js/data/guidance.js"></script>
   <script src="js/data/relics.js"></script>
   <script src="js/data/khatmah.js"></script>
@@ -319,6 +336,7 @@
   <script src="js/scenarios.js"></script>
   <script src="js/constellation.js"></script>
   <script src="js/lineage.js"></script>
+  <script src="js/poems-lexicon.js"></script>
   <script src="js/guidance-search.js"></script>
   <script src="js/museum.js"></script>
   <script src="js/poster.js"></script>
