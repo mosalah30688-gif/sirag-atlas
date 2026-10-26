@@ -1,0 +1,12 @@
+{
+  "appId": "com.sirag.atlas.seerah",
+  "appName": "سراج أطلس السيرة النبوية",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#070B12"
+  }
+}

@@ -1,9 +1,13 @@
-const CACHE_NAME = 'sirag-atlas-stage-13';
+const CACHE_NAME = 'sirag-atlas-stage-14';
 const CORE_ASSETS = [
   './',
   './index.html',
   './css/styles.css',
   './assets/seal.svg',
+  './assets/icon-192.png',
+  './assets/icon-512.png',
+  './assets/icon-round.png',
+  './assets/apple-touch-icon.png',
   './manifest.json',
   './js/audio.js',
   './js/data/seerah-events.js',

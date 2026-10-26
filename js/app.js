@@ -94,7 +94,71 @@
       window.SiragKhatmah?.init();
 
       window.SiragTracker.renderScore();
+      this.bindInstallAppModal();
       this.registerPWA();
+    }
+
+    bindInstallAppModal() {
+      let deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      document.getElementById('install-apk-btn')?.addEventListener('click', () => {
+        if (window.SiragAudio) window.SiragAudio.playClick(580);
+        const modal = document.getElementById('relic-modal');
+        const content = document.getElementById('relic-modal-content');
+        if (!modal || !content) return;
+
+        content.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div>
+              <span class="inspector-date">📲 النسخة الاحترافية للهواتف والأجهزة اللوحية</span>
+              <h3 class="inspector-title">تطبيق «سراج أطلس السيرة النبوية»</h3>
+            </div>
+            <button class="btn-outline" id="close-install-modal">✕ إغلاق</button>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px; background:rgba(7,12,20,0.68); border:1px solid var(--border-gold); border-radius:18px; margin-bottom:16px;">
+            <img src="assets/icon-512.png" alt="سراج أطلس السيرة النبوية" style="width:118px; height:118px; border-radius:26px; box-shadow:0 12px 32px rgba(212,175,55,0.35); border:2px solid var(--gold-bright); margin-bottom:12px;" />
+            <strong style="font-family:var(--font-serif); font-size:1.5rem; color:var(--gold-bright);">سراج أطلس السيرة النبوية</strong>
+            <span style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">الإصدار v1.0.0 • يعمل أوفلاين بالكامل • حزمة com.sirag.atlas.seerah</span>
+          </div>
+
+          <div style="display:grid; gap:10px;">
+            <a href="https://github.com/mosalah30688-gif/sirag-atlas/releases/latest/download/sirag-atlas-seerah.apk"
+               target="_blank" rel="noopener" class="btn-gold" style="text-decoration:none; padding:13px 18px; font-size:0.95rem;">
+              🤖 تحميل ملف الأندرويد المباشر (sirag-atlas-seerah.apk)
+            </a>
+            <button class="btn-outline" id="pwa-direct-install-btn" style="padding:11px 18px;">
+              ⚡ تثبيت فوري كتطبيق ويب تقدّمي (PWA) على جهازك الحالي
+            </button>
+            <a href="https://github.com/mosalah30688-gif/sirag-atlas/releases"
+               target="_blank" rel="noopener" class="btn-outline" style="text-decoration:none; text-align:center; font-size:0.82rem;">
+              🔗 فتح صفحة الإصدارات الرسمية (GitHub Releases)
+            </a>
+          </div>
+          <p id="pwa-install-hint" style="text-align:center; font-size:0.8rem; color:var(--teal-wahi); margin-top:10px;"></p>
+        `;
+
+        modal.classList.add('open');
+
+        document.getElementById('close-install-modal')?.addEventListener('click', () => {
+          modal.classList.remove('open');
+        });
+
+        document.getElementById('pwa-direct-install-btn')?.addEventListener('click', async () => {
+          const hint = document.getElementById('pwa-install-hint');
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+          } else if (hint) {
+            hint.textContent = 'من قائمة المتصفح اختر «إضافة إلى الشاشة الرئيسية / Install App» ليظهر بأيقونته الذهبية الكاملة!';
+          }
+        });
+      });
     }
 
     bindNavigation() {
