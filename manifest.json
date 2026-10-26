@@ -1,0 +1,19 @@
+{
+  "name": "سِراج الأطلس — الأطلس النبوي الحي ﷺ",
+  "short_name": "سِراج الأطلس",
+  "description": "أطلس زماني-مكاني تفاعلي للسيرة النبوية الشريفة مع محاكي الغزوات، مجرة الصحابة، ومزامنة الوحي.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070B12",
+  "theme_color": "#0C1420",
+  "icons": [
+    {
+      "src": "assets/seal.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

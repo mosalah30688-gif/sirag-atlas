@@ -1,0 +1,1037 @@
+:root {
+  --bg-abyss: #060a11;
+  --bg-deep: #0b1320;
+  --bg-panel: rgba(14, 24, 39, 0.84);
+  --bg-panel-solid: #101c2e;
+  --bg-card: rgba(20, 33, 52, 0.72);
+  --bg-elevated: #172840;
+
+  --gold-bright: #f5d77f;
+  --gold-primary: #d4af37;
+  --gold-muted: #9b7b24;
+  --gold-glow: rgba(212, 175, 55, 0.24);
+  --border-gold: rgba(212, 175, 55, 0.28);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --teal-wahi: #2dd4bf;
+  --teal-glow: rgba(45, 212, 191, 0.2);
+  --emerald-ok: #10b981;
+  --crimson-alert: #ef4444;
+  --amber-warn: #f59e0b;
+
+  --text-ivory: #f8f4ea;
+  --text-secondary: #c5bfb0;
+  --text-muted: #8892a4;
+
+  --font-ui: 'Readex Pro', 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Amiri', 'Traditional Arabic', Georgia, serif;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --shadow-deep: 0 18px 45px rgba(0, 0, 0, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  background-color: var(--bg-abyss);
+  color: var(--text-ivory);
+  font-family: var(--font-ui);
+  direction: rtl;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(212, 175, 55, 0.09) 0%, transparent 42%),
+    radial-gradient(circle at 82% 20%, rgba(45, 212, 191, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(23, 40, 64, 0.65) 0%, transparent 60%);
+  padding-bottom: 84px;
+}
+
+/* Top Celestial Header */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 24px;
+  background: rgba(7, 12, 20, 0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-seal {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--gold-glow);
+  transition: transform 0.35s ease;
+}
+
+.brand-seal:hover {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.brand-titles h1 {
+  font-family: var(--font-serif);
+  font-size: 1.38rem;
+  color: var(--gold-bright);
+  line-height: 1.15;
+}
+
+.brand-titles p {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+/* Primary Navigation Tabs */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 25, 42, 0.78);
+  padding: 5px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+}
+
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  color: var(--gold-bright);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, #d4af37 0%, #9b7b24 100%);
+  color: #070b12;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hijri-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-gold);
+  font-size: 0.78rem;
+  color: var(--gold-bright);
+}
+
+.progress-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.1);
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  font-size: 0.78rem;
+  color: var(--teal-wahi);
+  font-weight: 600;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  color: var(--text-ivory);
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover,
+.icon-btn.active {
+  background: rgba(212, 175, 55, 0.22);
+  color: var(--gold-bright);
+  box-shadow: 0 0 14px var(--gold-glow);
+}
+
+/* Hijri Memory Strip */
+.hijri-memory-banner {
+  max-width: 1400px;
+  margin: 14px auto 0;
+  padding: 0 20px;
+}
+
+.memory-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 18px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.14), rgba(16, 28, 46, 0.86), rgba(45, 212, 191, 0.1));
+  border: 1px solid var(--border-gold);
+}
+
+.memory-tag {
+  background: var(--gold-primary);
+  color: #070b12;
+  font-weight: 700;
+  font-size: 0.73rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.memory-text {
+  flex: 1;
+  font-size: 0.86rem;
+  color: var(--text-ivory);
+}
+
+.memory-jump-btn {
+  background: transparent;
+  color: var(--gold-bright);
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.memory-jump-btn:hover {
+  background: var(--gold-primary);
+  color: #070b12;
+}
+
+/* Main Workspace Views */
+.app-container {
+  max-width: 1400px;
+  margin: 16px auto;
+  padding: 0 20px;
+}
+
+.view-section {
+  display: none;
+  animation: fadeSlideIn 0.32s ease;
+}
+
+.view-section.active {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Headers */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--gold-bright);
+}
+
+.section-head p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  max-width: 680px;
+}
+
+/* Glass Panels & Buttons */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-deep);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #e5c158 0%, #b38728 100%);
+  color: #070b12;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.86rem;
+  border: none;
+  border-radius: 12px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-ivory);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover,
+.btn-outline.active {
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+
+/* =========================================
+   VIEW 1: CHRONO-SPATIAL ATLAS LAYOUT
+   ========================================= */
+.atlas-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pill-btn {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pill-btn.active,
+.pill-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold-bright);
+  border-color: var(--gold-primary);
+}
+
+.search-box {
+  position: relative;
+  min-width: 240px;
+}
+
+.search-box input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: var(--text-ivory);
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.atlas-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.map-stage {
+  position: relative;
+  overflow: hidden;
+  min-height: 530px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.map-Hud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 0;
+  z-index: 4;
+}
+
+.era-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-bright);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.map-svg-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+}
+
+#arabia-map-svg {
+  width: 100%;
+  height: auto;
+  max-height: 430px;
+  user-select: none;
+}
+
+.map-node {
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.map-node:hover circle.node-dot {
+  r: 8.5;
+}
+
+.pulse-ring {
+  animation: mapPulse 2.1s infinite ease-out;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes mapPulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.route-path-animated {
+  stroke-dasharray: 8 6;
+  animation: dashFlow 18s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -280;
+  }
+}
+
+/* Time Scrubber Dock inside Map Stage */
+.time-scrubber-bar {
+  background: rgba(7, 12, 20, 0.9);
+  border-top: 1px solid var(--border-gold);
+  padding: 14px 18px;
+}
+
+.scrubber-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+}
+
+.scrubber-year-display {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.scrubber-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="range"].seerah-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold-primary), rgba(45, 212, 191, 0.6));
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].seerah-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  border: 3px solid #070b12;
+  box-shadow: 0 0 14px rgba(245, 215, 127, 0.85);
+  cursor: grab;
+}
+
+.station-strip {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-top: 10px;
+  scrollbar-width: thin;
+}
+
+.station-chip {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.station-chip.active {
+  background: var(--gold-primary);
+  color: #070b12;
+  font-weight: 700;
+  border-color: var(--gold-bright);
+}
+
+/* Event Detail Inspector Card */
+.station-inspector {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inspector-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.inspector-date {
+  font-size: 0.78rem;
+  color: var(--gold-primary);
+  font-weight: 600;
+}
+
+.inspector-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--gold-bright);
+  line-height: 1.25;
+  margin-top: 3px;
+}
+
+.depth-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  background: rgba(7, 12, 20, 0.65);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.depth-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 7px 8px;
+  border-radius: 9px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.depth-btn.active {
+  background: rgba(212, 175, 55, 0.22);
+  color: var(--gold-bright);
+  font-weight: 700;
+  border: 1px solid var(--border-gold);
+}
+
+.narrative-box {
+  line-height: 1.85;
+  font-size: 0.94rem;
+  color: var(--text-ivory);
+  background: rgba(9, 15, 26, 0.55);
+  padding: 15px 16px;
+  border-radius: var(--radius-md);
+  border-right: 3px solid var(--gold-primary);
+}
+
+/* Synced Wahi (Quran) Card */
+.wahi-card {
+  background: linear-gradient(135deg, rgba(13, 42, 48, 0.72), rgba(11, 22, 36, 0.9));
+  border: 1px solid rgba(45, 212, 191, 0.38);
+  border-radius: var(--radius-md);
+  padding: 15px 16px;
+}
+
+.wahi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.wahi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--teal-wahi);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.wahi-ayah {
+  font-family: var(--font-serif);
+  font-size: 1.32rem;
+  line-height: 1.95;
+  color: #ffffff;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.wahi-context {
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Past vs Today Comparison Box */
+.then-now-card {
+  background: rgba(212, 175, 55, 0.07);
+  border: 1px dashed var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 13px 15px;
+  font-size: 0.83rem;
+}
+
+.then-now-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.then-now-col {
+  background: rgba(7, 12, 20, 0.55);
+  padding: 9px 11px;
+  border-radius: 10px;
+}
+
+.then-now-col strong {
+  display: block;
+  color: var(--gold-bright);
+  font-size: 0.76rem;
+  margin-bottom: 3px;
+}
+
+/* =========================================
+   VIEW 2: TACTICAL BATTLE SIMULATOR
+   ========================================= */
+.battle-selector-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.battle-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.tactical-board {
+  padding: 16px;
+}
+
+.tactical-svg-box {
+  width: 100%;
+  background: radial-gradient(circle at center, #142235 0%, #09111d 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-gold);
+  overflow: hidden;
+}
+
+#tactical-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tactical-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.phase-dots {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.phase-step-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.phase-step-btn.active {
+  background: var(--gold-primary);
+  color: #070b12;
+  font-weight: 700;
+}
+
+.battle-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric-box {
+  background: rgba(8, 14, 24, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 11px 13px;
+}
+
+.metric-box span {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.metric-box strong {
+  font-size: 0.96rem;
+  color: var(--gold-bright);
+}
+
+/* =========================================
+   VIEW 3: IF YOU WERE THERE (SCENARIOS)
+   ========================================= */
+.scenario-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 18px;
+}
+
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.scenario-nav-item {
+  text-align: right;
+  padding: 13px 15px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-ivory);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scenario-nav-item.active,
+.scenario-nav-item:hover {
+  border-color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.14);
+}
+
+.scenario-stage-card {
+  padding: 26px;
+}
+
+.choice-grid {
+  display: grid;
+  gap: 11px;
+  margin: 18px 0;
+}
+
+.choice-btn {
+  text-align: right;
+  padding: 15px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(15, 27, 45, 0.85);
+  border: 1px solid var(--border-gold);
+  color: var(--text-ivory);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.choice-btn:hover {
+  background: rgba(212, 175, 55, 0.16);
+  transform: translateX(-4px);
+}
+
+.choice-btn.selected-prophetic {
+  border-color: var(--emerald-ok);
+  background: rgba(16, 185, 129, 0.16);
+}
+
+.choice-btn.selected-other {
+  border-color: var(--amber-warn);
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.revelation-outcome {
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(212, 175, 55, 0.12));
+  border: 1px solid var(--gold-primary);
+  line-height: 1.8;
+}
+
+/* =========================================
+   VIEW 4: COMPANIONS CONSTELLATION
+   ========================================= */
+.constellation-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.constellation-canvas-wrap {
+  padding: 14px;
+  position: relative;
+}
+
+#constellation-svg {
+  width: 100%;
+  height: auto;
+  max-height: 540px;
+  background: radial-gradient(circle at center, #132238 0%, #070c15 78%);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-gold);
+}
+
+.companion-star {
+  cursor: pointer;
+  transition: opacity 0.25s;
+}
+
+/* =========================================
+   VIEW 5: 3D PROPHETIC MUSEUM
+   ========================================= */
+.museum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+.relic-3d-wrapper {
+  perspective: 1100px;
+}
+
+.relic-card {
+  position: relative;
+  height: 100%;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(155deg, rgba(25, 40, 65, 0.92), rgba(9, 15, 26, 0.96));
+  border: 1px solid var(--gold-primary);
+  box-shadow: var(--shadow-deep);
+  transform-style: preserve-3d;
+  transition: transform 0.16s ease-out, box-shadow 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.relic-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 30%), rgba(245, 215, 127, 0.22), transparent 55%);
+}
+
+.relic-manuscript {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  line-height: 1.9;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  color: #fff6db;
+}
+
+/* Mobile Bottom Dock */
+.mobile-dock {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 80;
+  background: rgba(7, 12, 20, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-gold);
+  padding: 8px 10px;
+  justify-content: space-around;
+}
+
+.dock-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.dock-btn.active {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+/* Modal for Relic Full Detail */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(3, 6, 12, 0.82);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-card {
+  max-width: 680px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 26px;
+}
+
+@media (max-width: 1024px) {
+  .main-nav {
+    display: none;
+  }
+  .mobile-dock {
+    display: flex;
+  }
+  .atlas-grid,
+  .battle-layout,
+  .scenario-layout,
+  .constellation-layout {
+    grid-template-columns: 1fr;
+  }
+  .hijri-pill {
+    display: none;
+  }
+}
