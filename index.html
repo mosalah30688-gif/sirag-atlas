@@ -27,17 +27,25 @@
       <button class="nav-tab active" data-view="atlas">🗺️ الأطلس</button>
       <button class="nav-tab" data-view="hijrah">🐪 الهجرة والفرسان</button>
       <button class="nav-tab" data-view="battles">⚔️ الغزوات</button>
+      <button class="nav-tab" data-view="sanctuaries">🕌 الحرمان</button>
       <button class="nav-tab" data-view="scenarios">🧭 المعايشة</button>
       <button class="nav-tab" data-view="constellation">✨ الصحابة</button>
       <button class="nav-tab" data-view="lineage">🌿 النسب</button>
-      <button class="nav-tab" data-view="guidance">💎 الهدي التطبيقي</button>
-      <button class="nav-tab" data-view="museum">📜 المتحف 3D</button>
+      <button class="nav-tab" data-view="guidance">💎 الهدي</button>
+      <button class="nav-tab" data-view="museum">📜 المتحف</button>
     </nav>
 
     <div class="header-actions">
       <button class="icon-btn" id="omni-search-btn" title="البحث الفوري الشامل والمحفوظات (Ctrl+K)">
         <span>🔍</span>
-        <span>بحث ومحفوظات</span>
+        <span>بحث</span>
+      </button>
+      <button class="icon-btn" id="theme-toggle-btn" title="التبديل بين الوضع الليلي الفلكي ووضع الرقّ النهاري المريح">
+        <span>📜</span>
+        <span>الرقّ النهاري</span>
+      </button>
+      <button class="icon-btn" id="font-scale-btn" title="تكبير حجم الخط لراحة القراءة">
+        <span>أ+</span>
       </button>
       <div class="hijri-pill" id="hijri-today-pill" title="التاريخ الهجري اليوم">
         <span>🌙</span>
@@ -160,6 +168,21 @@
       </div>
     </section>
 
+    <!-- VIEW 2C: SACRED SANCTUARIES INTERACTIVE BLUEPRINTS (STAGE 11) -->
+    <section id="view-sanctuaries" class="view-section">
+      <div class="section-head">
+        <div>
+          <h2>المخطط الهندسي التفاعلي لمعالم الحرمين الشريفين</h2>
+          <p>تجول تفاعلياً داخل عمارة المسجد النبوي الشريف والروضة المباركة والحجرة النبوية، ومعالم الكعبة المشرفة والمطاف.</p>
+        </div>
+        <div class="filter-pills" id="sanctuary-subtabs">
+          <button class="pill-btn active" data-site="madinah">🕌 المسجد النبوي والروضة الشريفة</button>
+          <button class="pill-btn" data-site="makkah">🕋 الكعبة المشرفة والمسجد الحرام</button>
+        </div>
+      </div>
+      <div id="sanctuaries-stage"></div>
+    </section>
+
     <!-- VIEW 3: IF YOU WERE THERE (SHURA SCENARIOS) -->
     <section id="view-scenarios" class="view-section">
       <div class="section-head">
@@ -251,6 +274,7 @@
     <button class="dock-btn active" data-view="atlas"><span>🗺️</span><span>الأطلس</span></button>
     <button class="dock-btn" data-view="hijrah"><span>🐪</span><span>الهجرة</span></button>
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
+    <button class="dock-btn" data-view="sanctuaries"><span>🕌</span><span>الحرمان</span></button>
     <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
     <button class="dock-btn" data-view="guidance"><span>💎</span><span>الهدي</span></button>
     <button class="dock-btn" data-view="museum"><span>📜</span><span>المتحف</span></button>
@@ -266,6 +290,7 @@
   <script src="js/data/seerah-events.js"></script>
   <script src="js/data/hijrah-quiz.js"></script>
   <script src="js/data/battles.js"></script>
+  <script src="js/data/sanctuaries.js"></script>
   <script src="js/data/scenarios.js"></script>
   <script src="js/data/companions.js"></script>
   <script src="js/data/lineage.js"></script>
@@ -274,6 +299,7 @@
   <script src="js/atlas.js"></script>
   <script src="js/hijrah-quiz.js"></script>
   <script src="js/battles.js"></script>
+  <script src="js/sanctuaries.js"></script>
   <script src="js/scenarios.js"></script>
   <script src="js/constellation.js"></script>
   <script src="js/lineage.js"></script>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sirag-atlas-stage-10';
+const CACHE_NAME = 'sirag-atlas-stage-11';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const CORE_ASSETS = [
   './js/data/seerah-events.js',
   './js/data/hijrah-quiz.js',
   './js/data/battles.js',
+  './js/data/sanctuaries.js',
   './js/data/scenarios.js',
   './js/data/companions.js',
   './js/data/lineage.js',
@@ -17,6 +18,7 @@ const CORE_ASSETS = [
   './js/atlas.js',
   './js/hijrah-quiz.js',
   './js/battles.js',
+  './js/sanctuaries.js',
   './js/scenarios.js',
   './js/constellation.js',
   './js/lineage.js',

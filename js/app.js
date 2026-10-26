@@ -84,6 +84,7 @@
       window.SiragAtlas?.init();
       window.SiragHijrahQuiz?.init();
       window.SiragBattles?.init();
+      window.SiragSanctuaries?.init();
       window.SiragScenarios?.init();
       window.SiragConstellation?.init();
       window.SiragLineage?.init();

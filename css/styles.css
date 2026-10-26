@@ -1042,3 +1042,66 @@ input[type="range"].seerah-slider::-webkit-slider-thumb {
     display: none;
   }
 }
+
+/* =========================================
+   STAGE 11: ROYAL ANTIQUE PARCHMENT THEME
+   ========================================= */
+body.theme-parchment {
+  --bg-abyss: #f5efe1;
+  --bg-deep: #ece2cc;
+  --bg-panel: rgba(255, 251, 241, 0.92);
+  --bg-panel-solid: #fffaf0;
+  --bg-card: rgba(242, 232, 210, 0.85);
+  --bg-elevated: #e8dcc2;
+
+  --gold-bright: #7c5608;
+  --gold-primary: #9c6f12;
+  --gold-muted: #6e4e0c;
+  --border-gold: rgba(156, 111, 18, 0.34);
+  --border-subtle: rgba(60, 42, 15, 0.14);
+
+  --teal-wahi: #0f766e;
+  --text-ivory: #1d160d;
+  --text-secondary: #4a3d2a;
+  --text-muted: #6e5f47;
+  --shadow-deep: 0 12px 32px rgba(72, 52, 18, 0.14);
+
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(212, 175, 55, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 80% 85%, rgba(15, 118, 110, 0.08) 0%, transparent 45%);
+}
+
+body.theme-parchment .top-header,
+body.theme-parchment .mobile-dock,
+body.theme-parchment .time-scrubber-bar {
+  background: rgba(250, 243, 228, 0.95);
+}
+
+body.theme-parchment .main-nav,
+body.theme-parchment .depth-switcher {
+  background: rgba(232, 220, 194, 0.78);
+}
+
+body.theme-parchment .narrative-box,
+body.theme-parchment .then-now-col,
+body.theme-parchment .metric-box,
+body.theme-parchment .choice-btn {
+  background: rgba(247, 239, 223, 0.92);
+  color: #1d160d;
+}
+
+body.theme-parchment .wahi-card {
+  background: linear-gradient(135deg, rgba(204, 251, 241, 0.65), rgba(254, 249, 235, 0.95));
+  border-color: rgba(15, 118, 110, 0.38);
+}
+
+body.theme-parchment .wahi-ayah,
+body.theme-parchment .wahi-card p,
+body.theme-parchment .then-now-card p,
+body.theme-parchment .relic-manuscript {
+  color: #18120a !important;
+}
+
+body.theme-parchment .relic-card {
+  background: linear-gradient(155deg, #fffdf7, #efe3c8);
+}
