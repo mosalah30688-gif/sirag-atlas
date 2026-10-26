@@ -379,6 +379,9 @@
             <h3 class="inspector-title">${ev.title}</h3>
             <p style="font-size:0.83rem; color:var(--text-secondary); margin-top:4px;">📍 ${ev.locationName}</p>
           </div>
+          <button class="btn-outline" id="open-golden-poster-btn" title="توليد وتحميل بطاقة ذهبية عالية الدقة لهذا الموقف" style="white-space:nowrap; font-size:0.78rem; padding:7px 12px;">
+            🖼️ بطاقة ذهبية
+          </button>
         </div>
 
         <!-- 3 Reading Depth Switcher -->
@@ -462,6 +465,10 @@
         this.quranAudio.onended = () => {
           btn.textContent = '🔊 استمع للآية';
         };
+      });
+
+      document.getElementById('open-golden-poster-btn')?.addEventListener('click', () => {
+        window.SiragPoster?.openForStation(ev);
       });
 
       document.getElementById('jump-linked-battle')?.addEventListener('click', () => {

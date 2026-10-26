@@ -444,7 +444,8 @@ window.SEERAH_EVENTS = [
       then: 'سهل مؤتة بأرض البلقاء جنوب الشام على تخوم الإمبراطورية البيزنطية.',
       now: 'بلدة المزار الجنوبي ومؤتة في محافظة الكرك بالأردن (نحو 950 كم شمال المدينة المنورة).'
     },
-    relatedCompanions: ['jafar', 'khalid']
+    relatedCompanions: ['jafar', 'khalid'],
+    linkedBattle: 'mutah'
   },
   {
     id: 'fath-makkah',
@@ -474,6 +475,7 @@ window.SEERAH_EVENTS = [
       now: 'المسجد الحرام بمكة المكرمة وموقع معسكر مرّ الظهران (وادي فاطمة / الجموم اليوم شمال مكة).'
     },
     relatedCompanions: ['bilal', 'khalid', 'abu-bakr', 'umar', 'ali'],
+    linkedBattle: 'fath-makkah',
     linkedScenario: 'makkah-amnesty'
   },
   {
