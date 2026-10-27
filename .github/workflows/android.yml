@@ -2,7 +2,6 @@ name: Build Sirag Atlas (Android APK & Linux AppImage)
 
 on:
   push:
-    branches: [main]
     tags: ['v*']
   workflow_dispatch:
 

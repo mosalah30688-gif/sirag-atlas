@@ -21,7 +21,7 @@
 | 🤖 **Android (هواتف وتابلت)** | `sirag-atlas-seerah.apk` | [**تحميل الـ APK مباشرة**](https://github.com/mosalah30688-gif/sirag-atlas/releases/latest/download/sirag-atlas-seerah.apk) |
 | 🪟 **Windows 10/11 Portable (نسخة محمولة فورية بدون تثبيت)** | `Sirag-Atlas-Seerah-Portable-x64.exe` | [**تحميل ملف الـ .EXE البورتابل مباشرة**](https://github.com/mosalah30688-gif/sirag-atlas-windows/releases/latest/download/Sirag-Atlas-Seerah-Portable-x64.exe) • [**مستودع ويندوز المخصص**](https://github.com/mosalah30688-gif/sirag-atlas-windows) |
 | 🛍️ **Windows 11 Store Package (حزمة متجر ويندوز 11)** | `Sirag-Atlas-Seerah-Win11-Store-x64.msix` | [**تحميل حزمة الـ .MSIX مباشرة**](https://github.com/mosalah30688-gif/sirag-atlas-windows/releases/latest/download/Sirag-Atlas-Seerah-Win11-Store-x64.msix) • [**مستودع ويندوز المخصص**](https://github.com/mosalah30688-gif/sirag-atlas-windows) |
-| 🐧 **Linux Desktop (واجهة Qt6 أصلية لجميع التوزيعات)** | `Sirag-Atlas-Seerah-x86_64.AppImage` | [**تحميل الـ AppImage مباشرة**](https://github.com/mosalah30688-gif/sirag-atlas-linux/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage) • [**مستودع لينكس المخصص**](https://github.com/mosalah30688-gif/sirag-atlas-linux) |
+| 🐧 **Linux Desktop** | `Sirag-Atlas-Seerah-x86_64.AppImage` | [**تحميل الـ AppImage مباشرة**](https://github.com/mosalah30688-gif/sirag-atlas-linux/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage) • [**مستودع لينكس المخصص**](https://github.com/mosalah30688-gif/sirag-atlas-linux) |
 
 ---
 

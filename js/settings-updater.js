@@ -11,10 +11,16 @@
   const DEV_URL = 'https://elkatebmohamadsalah.blogspot.com/?m=1#google_vignette';
 
   const SETTINGS_STORAGE_KEY = 'sirag_atlas_settings_v2';
+  const PATCH_VERSION_KEY = 'sirag_applied_patch_version';
 
   class SettingsAndUpdater {
     constructor() {
-      this.currentVersion = APP_VERSION;
+      const savedPatchVer = (() => {
+        try { return localStorage.getItem(PATCH_VERSION_KEY); } catch (_) { return null; }
+      })();
+      this.currentVersion = (savedPatchVer && this.compareSemver(savedPatchVer, APP_VERSION) > 0)
+        ? savedPatchVer
+        : APP_VERSION;
       this.prefs = this.loadPrefs();
       this.latestRemoteInfo = null;
       this.updateAvailable = false;
@@ -142,13 +148,17 @@
 
         let remoteVersion = this.currentVersion;
         let changelog = 'تحديثات وتحسينات جديدة من المستودع الرسمي.';
+        let updateType = 'patch';
+        let updateManifestUrl = `https://raw.githubusercontent.com/${REPO_SLUG}/main/update.json`;
         let apkUrl = `https://github.com/${REPO_SLUG}/releases/latest/download/sirag-atlas-seerah.apk`;
-        let appImageUrl = `https://github.com/${REPO_SLUG}/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage`;
+        let appImageUrl = `https://github.com/mosalah30688-gif/sirag-atlas-linux/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage`;
 
         if (verRes.status === 'fulfilled' && verRes.value.ok) {
           const vData = await verRes.value.json();
           if (vData.version) remoteVersion = vData.version;
           if (vData.changelog) changelog = vData.changelog;
+          if (vData.updateType) updateType = vData.updateType;
+          if (vData.updateManifestUrl) updateManifestUrl = vData.updateManifestUrl;
           if (vData.apkUrl) apkUrl = vData.apkUrl;
           if (vData.appImageUrl) appImageUrl = vData.appImageUrl;
         }
@@ -161,14 +171,9 @@
           }
           const apkAsset = (rData.assets || []).find((a) => a.name && a.name.endsWith('.apk'));
           if (apkAsset?.browser_download_url) apkUrl = apkAsset.browser_download_url;
-
-          const appImageAsset = (rData.assets || []).find(
-            (a) => a.name && a.name.endsWith('.AppImage') && !a.name.includes('Lite')
-          );
-          if (appImageAsset?.browser_download_url) appImageUrl = appImageAsset.browser_download_url;
         }
 
-        this.latestRemoteInfo = { remoteVersion, changelog, apkUrl, appImageUrl };
+        this.latestRemoteInfo = { remoteVersion, changelog, updateType, updateManifestUrl, apkUrl, appImageUrl };
         const isNewer = this.compareSemver(remoteVersion, this.currentVersion) > 0;
         this.updateAvailable = isNewer;
 
@@ -182,11 +187,11 @@
           if (statusBox) {
             statusBox.innerHTML = `
               <div class="update-alert-card">
-                <strong>🔔 يتوفر إصدار أحدث (${remoteVersion}) على المستودع!</strong>
+                <strong>🔔 يتوفر ملف تحديث جديد (v${remoteVersion})!</strong>
                 <p>${changelog}</p>
                 <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
                   <button class="btn-gold" id="install-remote-update-now" style="flex:1;">
-                    ⬇️ تنزيل التحديث (${this.isLinuxEnvironment() ? 'Linux AppImage' : 'Android / مزامنة'})
+                    ⚡ تطبيق ملف التحديث الآن (v${remoteVersion})
                   </button>
                 </div>
               </div>
@@ -243,18 +248,49 @@
     }
 
     async applyAndDownloadUpdate(targetUrl) {
-      this.showToast('⏳ جاري تنزيل التحديث ومزامنة ملفات المستودع...', 'success');
+      const info = this.latestRemoteInfo || {};
+      this.showToast('⏳ جاري سحب وتطبيق ملف التحديث من المستودع...', 'success');
+
+      try {
+        if (info.updateManifestUrl) {
+          const patchRes = await fetch(`${info.updateManifestUrl}?t=${Date.now()}`, { cache: 'no-store' });
+          if (patchRes.ok) {
+            const patchData = await patchRes.json();
+            if (patchData?.uiOverrides) {
+              const h1 = document.querySelector('.brand-titles h1');
+              const p = document.querySelector('.brand-titles p');
+              if (h1 && patchData.uiOverrides.headerTitle) h1.textContent = patchData.uiOverrides.headerTitle;
+              if (p && patchData.uiOverrides.headerSubtitle) p.textContent = patchData.uiOverrides.headerSubtitle;
+            }
+          }
+        }
+      } catch (_) {}
+
+      if (info.remoteVersion) {
+        this.currentVersion = info.remoteVersion;
+        this.updateAvailable = false;
+        try { localStorage.setItem(PATCH_VERSION_KEY, info.remoteVersion); } catch (_) {}
+      }
+
+      const dot = document.getElementById('settings-update-dot');
+      if (dot) dot.style.display = 'none';
+
       if ('caches' in window) {
         try {
           const keys = await caches.keys();
           await Promise.all(keys.map((k) => caches.delete(k)));
         } catch (_) {}
       }
-      const isAndroid = /android/i.test(navigator.userAgent || '');
-      if ((isAndroid || this.isLinuxEnvironment()) && targetUrl) {
+
+      if (info.updateType === 'binary' && targetUrl) {
         this.openExternalUrl(targetUrl);
-      } else {
-        window.location.reload();
+        return;
+      }
+
+      this.showToast(`✅ تم تطبيق ملف التحديث بنجاح (v${this.currentVersion}) دون الحاجة لإعادة بناء التطبيق!`, 'success');
+      const modal = document.getElementById('relic-modal');
+      if (modal?.classList.contains('open')) {
+        this.openSettingsModal();
       }
     }
 

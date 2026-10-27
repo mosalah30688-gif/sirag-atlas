@@ -1,13 +1,15 @@
 {
-  "version": "1.2.0",
-  "versionCode": 3,
-  "releaseTag": "v1.2.0",
+  "version": "1.2.1",
+  "versionCode": 4,
+  "updateType": "patch",
   "publishedAt": "2026-10-27",
   "appName": "سراج أطلس السيرة النبوية",
   "developer": "محمد صلاح عبد الخالق",
   "developerUrl": "https://elkatebmohamadsalah.blogspot.com/?m=1#google_vignette",
+  "updateManifestUrl": "https://raw.githubusercontent.com/mosalah30688-gif/sirag-atlas/main/update.json",
   "apkUrl": "https://github.com/mosalah30688-gif/sirag-atlas/releases/latest/download/sirag-atlas-seerah.apk",
-  "appImageUrl": "https://github.com/mosalah30688-gif/sirag-atlas/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage",
-  "liteAppImageUrl": "https://github.com/mosalah30688-gif/sirag-atlas/releases/latest/download/Sirag-Atlas-Lite-x86_64.AppImage",
-  "changelog": "الإصدار 1.2.0: إطلاق النسخة المكتبية الملكية لنظام لينكس بصيغة AppImage مع قوائم عربية أصيلة واختصارات لوحة مفاتيح، وتحديث متكامل مع فاحص التحديثات الحي."
+  "windowsExeUrl": "https://github.com/mosalah30688-gif/sirag-atlas-windows/releases/latest/download/Sirag-Atlas-Seerah-Portable-x64.exe",
+  "windowsMsixUrl": "https://github.com/mosalah30688-gif/sirag-atlas-windows/releases/latest/download/Sirag-Atlas-Seerah-Win11-Store-x64.msix",
+  "appImageUrl": "https://github.com/mosalah30688-gif/sirag-atlas-linux/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage",
+  "changelog": "تحديث الواجهة v1.2.1: تنقية واختصار العناوين والنصوص وإتاحة التحديث المباشر عبر ملف التحديث دون إعادة بناء التطبيق."
 }
