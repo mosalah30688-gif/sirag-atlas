@@ -1,4 +1,4 @@
-name: Build Sirag Atlas Android APK
+name: Build Sirag Atlas (Android APK & Linux AppImage)
 
 on:
   push:
@@ -10,7 +10,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-android:
+    name: Build Android APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,13 +47,78 @@ jobs:
           name: sirag-atlas-seerah-apk
           path: sirag-atlas-seerah.apk
 
+  build-linux-appimage:
+    name: Build Linux AppImage & Source Bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Offline Web Bundle
+        run: npm run build:www
+
+      - name: Build Standalone Electron AppImage (x86_64)
+        run: npx electron-builder --linux AppImage --x64 --publish never
+
+      - name: Build Lightweight Portable AppImage (x86_64)
+        run: bash scripts/build-lite-appimage.sh
+
+      - name: Package Complete Linux AppImage Source Archive
+        run: |
+          tar -czf dist/sirag-atlas-linux-appimage-source.tar.gz \
+            index.html manifest.json version.json sw.js \
+            package.json package-lock.json README-LINUX.md \
+            css js assets desktop scripts
+
+      - name: Verify Linux Outputs
+        run: ls -lh dist/*.AppImage dist/*.tar.gz
+
+      - name: Upload Linux AppImage Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sirag-atlas-linux-appimage
+          path: |
+            dist/Sirag-Atlas-Seerah-x86_64.AppImage
+            dist/Sirag-Atlas-Lite-x86_64.AppImage
+            dist/sirag-atlas-linux-appimage-source.tar.gz
+
+  publish-release:
+    name: Publish Unified Multi-Platform Release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-android, build-linux-appimage]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download All Platform Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-files
+          merge-multiple: true
+
+      - name: List Release Files
+        run: ls -lh release-files/
+
       - name: Publish GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          name: "سراج أطلس السيرة النبوية ${{ github.ref_name }}"
+          name: "سراج أطلس السيرة النبوية ${{ github.ref_name }} (Android APK + Linux AppImage)"
           body: |
-            ## 🕌 تطبيق سراج أطلس السيرة النبوية ﷺ (${{ github.ref_name }})
-            - **اسم التطبيق:** سراج أطلس السيرة النبوية (`com.sirag.atlas.seerah`)
-            - **العمل بدون إنترنت:** أوفلاين بالكامل شاملاً الخرائط التفاعلية، محاكي الغزوات، مجرة الصحابة، الديوان المسموع، والوثائق النبوية.
-          files: sirag-atlas-seerah.apk
+            ## 🕌 سراج أطلس السيرة النبوية ﷺ (${{ github.ref_name }})
+            **✨ تم التطوير بواسطة محمد صلاح عبد الخالق**
+
+            ### 📦 الحزم المتوفرة للتحميل المباشر (تعمل بدون إنترنت 100%):
+            1. 🐧 **`Sirag-Atlas-Seerah-x86_64.AppImage`** — النسخة المكتبية الكاملة المستقلة لنظام **Linux** (مبنية بـ Electron، تعمل مباشرة على جميع توزيعات لينكس بدون أي متطلبات مسبقة).
+            2. 🪶 **`Sirag-Atlas-Lite-x86_64.AppImage`** — النسخة المحمولة فائقة الخفة لنظام **Linux** (~3.3 MB).
+            3. 🛠️ **`sirag-atlas-linux-appimage-source.tar.gz`** — السورس الكامل لنسخة سطح مكتب لينكس لبناء وتخصيص الـ AppImage محلياً.
+            4. 🤖 **`sirag-atlas-seerah.apk`** — تطبيق الهواتف والأجهزة اللوحية لنظام **Android** (`com.sirag.atlas.seerah`).
+          files: |
+            release-files/Sirag-Atlas-Seerah-x86_64.AppImage
+            release-files/Sirag-Atlas-Lite-x86_64.AppImage
+            release-files/sirag-atlas-linux-appimage-source.tar.gz
+            release-files/sirag-atlas-seerah.apk

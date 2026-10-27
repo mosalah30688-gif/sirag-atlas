@@ -1,11 +1,12 @@
 /**
- * Sirag Atlas — Stage 15:
- * 1) Comprehensive Settings Center (Theme, 4-Step Font Size, Natural Soundscape, Notifications, Reset)
- * 2) Live GitHub Repository Update Checker & Downloader with Real Notifications + In-App Banner
- * 3) Official Developer Attribution ("تم التطوير بواسطة محمد صلاح عبد الخالق")
+ * Sirag Atlas — Stage 16 (v1.2.0):
+ * 1) Comprehensive Settings Center (Theme, 4-Step Font Size, Natural Soundscape, Notifications)
+ * 2) Cross-Platform Live GitHub Update Engine (Android APK + Linux AppImage) with Notifications
+ * 3) Desktop Electron Bridge Integration (Arabic Menu Shortcuts & External Browser Handler)
+ * 4) Official Developer Attribution ("تم التطوير بواسطة محمد صلاح عبد الخالق")
  */
 (function () {
-  const APP_VERSION = '1.1.0';
+  const APP_VERSION = '1.2.0';
   const REPO_SLUG = 'mosalah30688-gif/sirag-atlas';
   const DEV_URL = 'https://elkatebmohamadsalah.blogspot.com/?m=1#google_vignette';
 
@@ -25,9 +26,9 @@
         if (raw) return JSON.parse(raw);
       } catch (_) {}
       return {
-        theme: localStorage.getItem('sirag_atlas_theme_v1') || 'night', // 'night' | 'parchment'
-        fontScale: 'normal', // 'small' | 'normal' | 'large' | 'xlarge'
-        ambianceType: 'desert', // 'desert' | 'rain' | 'wind'
+        theme: localStorage.getItem('sirag_atlas_theme_v1') || 'night',
+        fontScale: 'normal',
+        ambianceType: 'desert',
         autoUpdateNotify: true
       };
     }
@@ -39,15 +40,37 @@
       } catch (_) {}
     }
 
+    isLinuxEnvironment() {
+      if (window.SiragDesktop?.isDesktop) return true;
+      return /linux/i.test(navigator.platform || '') && !/android/i.test(navigator.userAgent || '');
+    }
+
     init() {
       this.applyAppearance();
       this.bindHeaderSettingsBtn();
       this.bindDeveloperLinks();
+      this.bindDesktopMenuBridge();
 
-      // Auto-check GitHub repository for updates silently after startup
       if (this.prefs.autoUpdateNotify) {
         setTimeout(() => this.checkForUpdates(true), 2800);
       }
+    }
+
+    bindDesktopMenuBridge() {
+      if (!window.SiragDesktop?.onMenuAction) return;
+      window.SiragDesktop.onMenuAction(({ action, value }) => {
+        if (action === 'open-settings') {
+          this.openSettingsModal();
+        } else if (action === 'open-search') {
+          document.getElementById('omni-search-btn')?.click();
+        } else if (action === 'switch-view' && value) {
+          window.SiragApp?.switchView(value);
+        } else if (action === 'set-theme' && value) {
+          this.prefs.theme = value;
+          this.savePrefs();
+          this.applyAppearance();
+        }
+      });
     }
 
     applyAppearance() {
@@ -83,6 +106,10 @@
     }
 
     openExternalUrl(url) {
+      if (window.SiragDesktop?.openExternal) {
+        window.SiragDesktop.openExternal(url);
+        return;
+      }
       window.open(url, '_blank', 'noopener,noreferrer');
     }
 
@@ -104,7 +131,6 @@
       }
 
       try {
-        // 1. Check version.json on main branch (instant commit updates) + latest GitHub release
         const cacheBust = Date.now();
         const [verRes, relRes] = await Promise.allSettled([
           fetch(`https://raw.githubusercontent.com/${REPO_SLUG}/main/version.json?t=${cacheBust}`, { cache: 'no-store' }),
@@ -117,12 +143,14 @@
         let remoteVersion = this.currentVersion;
         let changelog = 'تحديثات وتحسينات جديدة من المستودع الرسمي.';
         let apkUrl = `https://github.com/${REPO_SLUG}/releases/latest/download/sirag-atlas-seerah.apk`;
+        let appImageUrl = `https://github.com/${REPO_SLUG}/releases/latest/download/Sirag-Atlas-Seerah-x86_64.AppImage`;
 
         if (verRes.status === 'fulfilled' && verRes.value.ok) {
           const vData = await verRes.value.json();
           if (vData.version) remoteVersion = vData.version;
           if (vData.changelog) changelog = vData.changelog;
           if (vData.apkUrl) apkUrl = vData.apkUrl;
+          if (vData.appImageUrl) appImageUrl = vData.appImageUrl;
         }
 
         if (relRes.status === 'fulfilled' && relRes.value.ok) {
@@ -131,34 +159,40 @@
           if (tagVer && this.compareSemver(tagVer, remoteVersion) > 0) {
             remoteVersion = tagVer;
           }
-          const asset = (rData.assets || []).find((a) => a.name && a.name.endsWith('.apk'));
-          if (asset && asset.browser_download_url) {
-            apkUrl = asset.browser_download_url;
-          }
+          const apkAsset = (rData.assets || []).find((a) => a.name && a.name.endsWith('.apk'));
+          if (apkAsset?.browser_download_url) apkUrl = apkAsset.browser_download_url;
+
+          const appImageAsset = (rData.assets || []).find(
+            (a) => a.name && a.name.endsWith('.AppImage') && !a.name.includes('Lite')
+          );
+          if (appImageAsset?.browser_download_url) appImageUrl = appImageAsset.browser_download_url;
         }
 
-        this.latestRemoteInfo = { remoteVersion, changelog, apkUrl };
+        this.latestRemoteInfo = { remoteVersion, changelog, apkUrl, appImageUrl };
         const isNewer = this.compareSemver(remoteVersion, this.currentVersion) > 0;
         this.updateAvailable = isNewer;
 
-        // Highlight gear dot if update available
         const dot = document.getElementById('settings-update-dot');
         if (dot) dot.style.display = isNewer ? 'block' : 'none';
 
+        const preferredBinaryUrl = this.isLinuxEnvironment() ? appImageUrl : apkUrl;
+
         if (isNewer) {
-          this.triggerUpdateNotification(remoteVersion, changelog, apkUrl);
+          this.triggerUpdateNotification(remoteVersion, changelog, preferredBinaryUrl);
           if (statusBox) {
             statusBox.innerHTML = `
               <div class="update-alert-card">
                 <strong>🔔 يتوفر إصدار أحدث (${remoteVersion}) على المستودع!</strong>
                 <p>${changelog}</p>
-                <button class="btn-gold" id="install-remote-update-now" style="width:100%; margin-top:8px;">
-                  ⬇️ تنزيل وتطبيق التحديث الآن (${remoteVersion})
-                </button>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+                  <button class="btn-gold" id="install-remote-update-now" style="flex:1;">
+                    ⬇️ تنزيل التحديث (${this.isLinuxEnvironment() ? 'Linux AppImage' : 'Android / مزامنة'})
+                  </button>
+                </div>
               </div>
             `;
             document.getElementById('install-remote-update-now')?.addEventListener('click', () => {
-              this.applyAndDownloadUpdate(apkUrl);
+              this.applyAndDownloadUpdate(preferredBinaryUrl);
             });
           }
         } else if (!silent) {
@@ -167,15 +201,17 @@
             statusBox.innerHTML = `
               <div style="padding:12px; border-radius:12px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.4);">
                 <strong style="color:#10b981; display:block; margin-bottom:4px;">✅ أنت على أحدث إصدار (v${this.currentVersion})</strong>
-                <span style="font-size:0.8rem; color:var(--text-secondary);">المستودع متصل ويعمل بنجاح. يمكنك أيضاً مزامنة الملفات أو إعادة تنزيل أحدث حزمة أندرويد:</span>
+                <span style="font-size:0.8rem; color:var(--text-secondary);">المستودع متصل ويعمل بنجاح. يمكنك مزامنة الملفات أو تنزيل الحزم الرسمية لنظامي أندرويد ولينكس:</span>
                 <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
-                  <button class="btn-outline" id="force-sw-sync-btn" style="flex:1; font-size:0.78rem;">🔄 مزامنة المحتوى السحابي</button>
-                  <button class="btn-outline" id="redownload-apk-btn" style="flex:1; font-size:0.78rem;">📲 تنزيل أحدث حزمة APK</button>
+                  <button class="btn-outline" id="force-sw-sync-btn" style="flex:1; font-size:0.77rem;">🔄 مزامنة المحتوى</button>
+                  <button class="btn-outline" id="redownload-apk-btn" style="flex:1; font-size:0.77rem;">🤖 حزمة Android APK</button>
+                  <button class="btn-outline" id="redownload-appimage-btn" style="flex:1; font-size:0.77rem;">🐧 حزمة Linux AppImage</button>
                 </div>
               </div>
             `;
             document.getElementById('force-sw-sync-btn')?.addEventListener('click', () => this.refreshWebCache());
             document.getElementById('redownload-apk-btn')?.addEventListener('click', () => this.openExternalUrl(apkUrl));
+            document.getElementById('redownload-appimage-btn')?.addEventListener('click', () => this.openExternalUrl(appImageUrl));
           }
         }
       } catch (_) {
@@ -185,15 +221,13 @@
       }
     }
 
-    triggerUpdateNotification(version, changelog, apkUrl) {
-      // 1. In-App Interactive Notification Banner
+    triggerUpdateNotification(version, changelog, targetUrl) {
       this.showToast(
         `🔔 تحديث جديد متاح (v${version}): ${changelog}`,
         'update',
-        () => this.applyAndDownloadUpdate(apkUrl)
+        () => this.applyAndDownloadUpdate(targetUrl)
       );
 
-      // 2. Native Browser / Android WebView Notification if permitted
       if ('Notification' in window && Notification.permission === 'granted') {
         try {
           const n = new Notification(`تحديث جديد — سراج أطلس السيرة النبوية v${version}`, {
@@ -202,25 +236,23 @@
           });
           n.onclick = () => {
             window.focus();
-            this.applyAndDownloadUpdate(apkUrl);
+            this.applyAndDownloadUpdate(targetUrl);
           };
         } catch (_) {}
       }
     }
 
-    async applyAndDownloadUpdate(apkUrl) {
+    async applyAndDownloadUpdate(targetUrl) {
       this.showToast('⏳ جاري تنزيل التحديث ومزامنة ملفات المستودع...', 'success');
-      // Clear SW caches so web/PWA layer fetches newest assets immediately
       if ('caches' in window) {
         try {
           const keys = await caches.keys();
           await Promise.all(keys.map((k) => caches.delete(k)));
         } catch (_) {}
       }
-      // If running inside Android Capacitor or user wants APK update, trigger APK download
       const isAndroid = /android/i.test(navigator.userAgent || '');
-      if (isAndroid && apkUrl) {
-        this.openExternalUrl(apkUrl);
+      if ((isAndroid || this.isLinuxEnvironment()) && targetUrl) {
+        this.openExternalUrl(targetUrl);
       } else {
         window.location.reload();
       }
@@ -297,7 +329,7 @@
             <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
               <div>
                 <strong style="color:var(--gold-bright); font-size:0.96rem;">🔄 التحديث المباشر من المستودع بالإشعارات</strong>
-                <p style="font-size:0.78rem; color:var(--text-secondary);">متصل بمستودع GitHub الرسمي لتنزيل أي مرحلة أو ميزة جديدة فوراً</p>
+                <p style="font-size:0.78rem; color:var(--text-secondary);">متصل بمستودع GitHub الرسمي لنظامي أندرويد (APK) ولينكس (AppImage)</p>
               </div>
               <span class="era-badge" style="font-size:0.74rem;">v${this.currentVersion}</span>
             </div>
@@ -395,6 +427,7 @@
           this.prefs.theme = btn.getAttribute('data-set-theme');
           this.savePrefs();
           this.applyAppearance();
+          if (window.SiragAudio) window.SiragAudio.playClick(520);
           this.openSettingsModal();
         });
       });
@@ -404,26 +437,36 @@
           this.prefs.fontScale = btn.getAttribute('data-set-font');
           this.savePrefs();
           this.applyAppearance();
+          if (window.SiragAudio) window.SiragAudio.playClick(540);
           this.openSettingsModal();
         });
       });
 
       document.getElementById('settings-audio-toggle')?.addEventListener('click', () => {
         window.SiragAudio?.toggle();
+        if (window.SiragAudio?.enabled && window.SiragAudio?.setAmbianceMode) {
+          window.SiragAudio.setAmbianceMode(this.prefs.ambianceType);
+        }
         this.openSettingsModal();
       });
 
       content.querySelectorAll('[data-set-amb]').forEach((btn) => {
         btn.addEventListener('click', () => {
-          const amb = btn.getAttribute('data-set-amb');
-          this.prefs.ambianceType = amb;
+          this.prefs.ambianceType = btn.getAttribute('data-set-amb');
           this.savePrefs();
-          if (window.SiragAudio) {
-            if (!window.SiragAudio.enabled) window.SiragAudio.toggle();
-            window.SiragAudio.setAmbiance(amb);
+          if (window.SiragAudio?.setAmbianceMode) {
+            window.SiragAudio.setAmbianceMode(this.prefs.ambianceType);
+          }
+          if (!window.SiragAudio?.enabled) {
+            window.SiragAudio?.toggle();
           }
           this.openSettingsModal();
         });
+      });
+
+      content.querySelector('.dev-modal-btn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openExternalUrl(DEV_URL);
       });
     }
   }

@@ -1,15 +1,66 @@
 {
   "name": "sirag-atlas-seerah",
-  "version": "1.1.0",
-  "private": true,
-  "description": "سراج أطلس السيرة النبوية — موسوعة زمانية-مكانية تفاعلية للسيرة النبوية الشريفة ﷺ",
+  "version": "1.2.0",
+  "description": "سراج أطلس السيرة النبوية — موسوعة زمانية-مكانية تفاعلية للسيرة النبوية الشريفة ﷺ (ويب • أندرويد • لينكس AppImage)",
+  "author": {
+    "name": "محمد صلاح عبد الخالق (Mohamed Salah Abdelkhalek)",
+    "url": "https://elkatebmohamadsalah.blogspot.com/?m=1#google_vignette"
+  },
+  "license": "MIT",
+  "main": "desktop/main.js",
   "scripts": {
     "build:www": "bash scripts/build-www.sh",
-    "android:sync": "bash scripts/build-www.sh && npx cap sync android"
+    "android:sync": "bash scripts/build-www.sh && npx cap sync android",
+    "desktop:start": "bash scripts/build-www.sh && electron .",
+    "linux:appimage": "bash scripts/build-www.sh && electron-builder --linux AppImage --x64",
+    "linux:lite": "bash scripts/build-lite-appimage.sh"
   },
   "dependencies": {
     "@capacitor/android": "^6.2.0",
     "@capacitor/cli": "^6.2.0",
     "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.sirag.atlas.seerah",
+    "productName": "Sirag Atlas Seerah",
+    "executableName": "sirag-atlas-seerah",
+    "compression": "maximum",
+    "electronLanguages": [
+      "ar",
+      "en-US"
+    ],
+    "files": [
+      "desktop/**/*",
+      "www/**/*",
+      "assets/icon-512.png",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "desktop/icons",
+      "category": "Education",
+      "synopsis": "سراج أطلس السيرة النبوية ﷺ — الأطلس الزماني-المكاني التفاعلي",
+      "description": "موسوعة زمانية-مكانية تفاعلية للسيرة النبوية الشريفة ﷺ تعمل بالكامل بدون إنترنت — تم التطوير بواسطة محمد صلاح عبد الخالق",
+      "artifactName": "Sirag-Atlas-Seerah-x86_64.${ext}",
+      "desktop": {
+        "Name": "Sirag Atlas Seerah",
+        "Name[ar]": "سراج أطلس السيرة النبوية",
+        "Comment": "Interactive Chrono-Spatial Encyclopedia of the Prophetic Biography",
+        "Comment[ar]": "الأطلس الزماني-المكاني التفاعلي لسيرة خير الأنام ﷺ — تم التطوير بواسطة محمد صلاح عبد الخالق",
+        "Keywords": "Seerah;Sirag;Atlas;Islam;Prophet;السيرة;سراج;أطلس;",
+        "StartupWMClass": "sirag-atlas-seerah"
+      }
+    }
   }
 }

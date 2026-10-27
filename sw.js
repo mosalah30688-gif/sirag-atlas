@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sirag-atlas-stage-15';
+const CACHE_NAME = 'sirag-atlas-stage-16';
 const CORE_ASSETS = [
   './',
   './index.html',
