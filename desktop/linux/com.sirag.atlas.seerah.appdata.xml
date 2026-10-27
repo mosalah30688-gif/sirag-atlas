@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>sirag-atlas-seerah.desktop</id>
+  <id>com.sirag.atlas.seerah</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Sirag Atlas Seerah</name>
   <name xml:lang="ar">سراج أطلس السيرة النبوية</name>
   <summary>Interactive Chrono-Spatial Encyclopedia of the Prophetic Biography</summary>
   <summary xml:lang="ar">الأطلس الزماني-المكاني التفاعلي لسيرة خير الأنام ﷺ</summary>
-  <developer_name>Mohamed Salah Abdelkhalek (محمد صلاح عبد الخالق)</developer_name>
+  <developer id="com.sirag.atlas">
+    <name>Mohamed Salah Abdelkhalek (محمد صلاح عبد الخالق)</name>
+  </developer>
   <description>
     <p>
       Sirag Atlas Seerah is an offline-capable Arabic interactive desktop encyclopedia covering the Prophetic Seerah:

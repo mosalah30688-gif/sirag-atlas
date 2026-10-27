@@ -14,6 +14,7 @@ bash scripts/build-www.sh
 APPDIR="$ROOT_DIR/dist/SiragAtlasLite.AppDir"
 rm -rf "$APPDIR"
 mkdir -p "$APPDIR/usr/share/sirag-atlas"
+mkdir -p "$APPDIR/usr/share/applications"
 mkdir -p "$APPDIR/usr/share/metainfo"
 mkdir -p "$APPDIR/usr/share/icons/hicolor/512x512/apps"
 mkdir -p "$APPDIR/usr/share/icons/hicolor/256x256/apps"
@@ -25,8 +26,9 @@ cp desktop/icons/512x512.png "$APPDIR/.DirIcon"
 cp desktop/icons/512x512.png "$APPDIR/usr/share/icons/hicolor/512x512/apps/sirag-atlas-seerah.png"
 cp desktop/icons/256x256.png "$APPDIR/usr/share/icons/hicolor/256x256/apps/sirag-atlas-seerah.png"
 cp desktop/icons/128x128.png "$APPDIR/usr/share/icons/hicolor/128x128/apps/sirag-atlas-seerah.png"
-cp desktop/linux/com.sirag.atlas.seerah.desktop "$APPDIR/sirag-atlas-seerah.desktop"
-cp desktop/linux/com.sirag.atlas.seerah.appdata.xml "$APPDIR/usr/share/metainfo/sirag-atlas-seerah.appdata.xml"
+cp desktop/linux/com.sirag.atlas.seerah.desktop "$APPDIR/com.sirag.atlas.seerah.desktop"
+cp desktop/linux/com.sirag.atlas.seerah.desktop "$APPDIR/usr/share/applications/com.sirag.atlas.seerah.desktop"
+cp desktop/linux/com.sirag.atlas.seerah.appdata.xml "$APPDIR/usr/share/metainfo/com.sirag.atlas.seerah.appdata.xml"
 
 cat > "$APPDIR/AppRun" << 'APPRUN_EOF'
 #!/usr/bin/env bash
@@ -139,7 +141,7 @@ if [ ! -f "$APPIMAGETOOL" ]; then
   chmod +x "$APPIMAGETOOL"
 fi
 
-ARCH=x86_64 "$APPIMAGETOOL" --appimage-extract-and-run "$APPDIR" \
+ARCH=x86_64 "$APPIMAGETOOL" --appimage-extract-and-run --no-appstream "$APPDIR" \
   "$ROOT_DIR/dist/Sirag-Atlas-Lite-x86_64.AppImage"
 
 chmod +x "$ROOT_DIR/dist/Sirag-Atlas-Lite-x86_64.AppImage"
