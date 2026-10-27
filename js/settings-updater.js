@@ -383,19 +383,11 @@
             </div>
           </div>
 
-          <!-- 4. Developer Credit Card -->
-          <div class="settings-group-card developer-credit-card">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-              <img src="assets/icon-round.png" alt="سراج أطلس السيرة النبوية" style="width:46px; height:46px; border-radius:50%; border:1.5px solid var(--gold-bright);" />
-              <div>
-                <span style="font-size:0.75rem; color:var(--teal-wahi); display:block;">حقوق التطوير والإعداد</span>
-                <strong style="font-family:var(--font-serif); font-size:1.18rem; color:var(--gold-bright);">
-                  تم التطوير بواسطة محمد صلاح عبد الخالق
-                </strong>
-              </div>
-            </div>
+          <!-- 4. Developer Credit Card ("عن المطور" + Button underneath) -->
+          <div class="settings-group-card developer-credit-card" style="text-align:center;">
+            <strong style="display:block; color:var(--gold-bright); font-size:0.95rem; margin-bottom:9px;">عن المطور</strong>
             <a href="${DEV_URL}" target="_blank" rel="noopener noreferrer" class="btn-gold dev-modal-btn" style="width:100%; text-decoration:none;">
-              🌐 تم التطوير بواسطة محمد صلاح عبد الخالق — زيارة الموقع ↗
+              محمد صلاح عبد الخالق ↗
             </a>
           </div>
         </div>
