@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#071320" />
   <title>سراج أطلس السيرة النبوية ﷺ</title>
   <link rel="manifest" href="manifest.json" />
@@ -14,60 +14,53 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <!-- Top Celestial Navigation Header -->
+  <!-- Sticky Top App Bar (Clean & Symmetrical on All Devices) -->
   <header class="top-header">
     <div class="brand-wrap">
-      <img src="assets/icon-round.png" alt="أيقونة سراج أطلس السيرة النبوية" class="brand-seal" style="width:50px; height:50px; border:1.5px solid var(--gold-primary);" />
+      <img src="assets/icon-round.png" alt="أيقونة سراج أطلس السيرة النبوية" class="brand-seal" />
       <div class="brand-titles">
         <h1>سراج أطلس السيرة النبوية</h1>
-        <p>الأطلس الزماني-المكاني التفاعلي لسيرة خير الأنام ﷺ</p>
+        <p>الأطلس الزماني-المكاني لسيرة خير الأنام ﷺ</p>
       </div>
     </div>
 
-    <nav class="main-nav" aria-label="التنقل الرئيسي">
-      <button class="nav-tab active" data-view="atlas">🗺️ الأطلس</button>
-      <button class="nav-tab" data-view="hijrah">🐪 الهجرة والفرسان</button>
-      <button class="nav-tab" data-view="battles">⚔️ الغزوات</button>
-      <button class="nav-tab" data-view="sanctuaries">🕌 الحرمان</button>
-      <button class="nav-tab" data-view="scenarios">🧭 المعايشة</button>
-      <button class="nav-tab" data-view="constellation">✨ الصحابة</button>
-      <button class="nav-tab" data-view="lineage">🌿 النسب</button>
-      <button class="nav-tab" data-view="diwan">🎙️ الديوان والمعجم</button>
-      <button class="nav-tab" data-view="guidance">💎 الهدي</button>
-      <button class="nav-tab" data-view="museum">📜 المتحف</button>
-      <button class="nav-tab" data-view="khatmah">🏅 الختمة والشهادة</button>
-    </nav>
-
     <div class="header-actions">
-      <button class="icon-btn" id="install-apk-btn" title="تثبيت تطبيق سراج أطلس السيرة النبوية أو تحميل ملف الأندرويد APK" style="border-color:var(--gold-bright); color:var(--gold-bright);">
-        <span>📲</span>
-        <span>التطبيق (APK)</span>
-      </button>
-      <button class="icon-btn" id="omni-search-btn" title="البحث الفوري الشامل والمحفوظات (Ctrl+K)">
-        <span>🔍</span>
-        <span>بحث</span>
-      </button>
-      <button class="icon-btn" id="theme-toggle-btn" title="التبديل بين الوضع الليلي الفلكي ووضع الرقّ النهاري المريح">
-        <span>📜</span>
-        <span>الرقّ النهاري</span>
-      </button>
-      <button class="icon-btn" id="font-scale-btn" title="تكبير حجم الخط لراحة القراءة">
-        <span>أ+</span>
-      </button>
       <div class="hijri-pill" id="hijri-today-pill" title="التاريخ الهجري اليوم">
         <span>🌙</span>
         <span id="hijri-date-text">التقويم الهجري</span>
       </div>
-      <div class="progress-pill" title="نسبة استكشاف السيرة">
+      <div class="progress-pill" title="نسبة استكشاف السيرة — اضغط لإصدار الشهادة">
         <span>🏅</span>
         <span id="explorer-score">0% مستكشف</span>
       </div>
-      <button class="icon-btn" id="audio-toggle-btn" title="تشغيل/إيقاف الأجواء الطبيعية (نسيم/مطر بدون موسيقى)">
-        <span id="audio-icon">🔇</span>
-        <span id="audio-label">أجواء طبيعية</span>
+      <button class="icon-btn" id="omni-search-btn" title="البحث الفوري الشامل والمحفوظات (Ctrl+K)">
+        <span>🔍</span>
+        <span class="btn-label-text">بحث</span>
+      </button>
+      <button class="icon-btn settings-trigger-btn" id="open-settings-btn" title="إعدادات التطبيق وفحص التحديثات">
+        <span>⚙️</span>
+        <span>الإعدادات</span>
+        <span id="settings-update-dot" class="update-dot" style="display:none;"></span>
       </button>
     </div>
   </header>
+
+  <!-- Unified Responsive Sections Navigation Strip (Visible & Swipeable on Phone, Tablet & Desktop!) -->
+  <div class="sections-nav-wrapper">
+    <nav class="main-nav" id="all-sections-nav" aria-label="أقسام التطبيق">
+      <button class="nav-tab active" data-view="atlas">🗺️ الأطلس الحي</button>
+      <button class="nav-tab" data-view="hijrah">🐪 الهجرة والفرسان</button>
+      <button class="nav-tab" data-view="battles">⚔️ محاكي الغزوات</button>
+      <button class="nav-tab" data-view="sanctuaries">🕌 معالم الحرمين</button>
+      <button class="nav-tab" data-view="scenarios">🧭 لو كنتَ يومئذٍ</button>
+      <button class="nav-tab" data-view="constellation">✨ مجرّة الصحابة</button>
+      <button class="nav-tab" data-view="lineage">🌿 النسب والشمائل</button>
+      <button class="nav-tab" data-view="diwan">🎙️ الديوان والمعجم</button>
+      <button class="nav-tab" data-view="guidance">💎 الهدي التطبيقي</button>
+      <button class="nav-tab" data-view="museum">📜 المتحف 3D</button>
+      <button class="nav-tab" data-view="khatmah">🏅 الختمة والشهادة</button>
+    </nav>
+  </div>
 
   <!-- Dynamic Hijri Memory Strip -->
   <div class="hijri-memory-banner">
@@ -101,26 +94,21 @@
       </div>
 
       <div class="atlas-grid">
-        <!-- Interactive SVG Map + Time Scrubber -->
         <div class="glass-panel map-stage">
           <div class="map-Hud-top">
             <span class="era-badge" id="map-era-badge">العهد المكي — مكة المكرمة</span>
-            <div style="display:flex; gap:8px;">
-              <button class="btn-outline" id="play-journey-btn">▶ تشغيل الرحلة تلقائياً</button>
-            </div>
+            <button class="btn-outline" id="play-journey-btn">▶ تشغيل الرحلة</button>
           </div>
 
-          <div class="map-svg-wrapper" id="atlas-map-container">
-            <!-- Populated dynamically by js/atlas.js -->
-          </div>
+          <div class="map-svg-wrapper" id="atlas-map-container"></div>
 
           <div class="time-scrubber-bar">
             <div class="scrubber-header">
               <span class="scrubber-year-display" id="scrubber-year-label">53 ق.هـ — 571 م</span>
               <div class="scrubber-controls">
-                <button class="btn-outline" id="prev-station-btn" style="padding:4px 10px;">◀ السابق</button>
-                <span id="station-counter" style="color:var(--text-secondary);">1 / 18</span>
-                <button class="btn-outline" id="next-station-btn" style="padding:4px 10px;">التالي ▶</button>
+                <button class="btn-outline compact-ctrl-btn" id="prev-station-btn">◀ السابق</button>
+                <span id="station-counter" class="counter-badge">1 / 18</span>
+                <button class="btn-outline compact-ctrl-btn" id="next-station-btn">التالي ▶</button>
               </div>
             </div>
             <input type="range" min="0" max="17" value="0" class="seerah-slider" id="time-scrubber" aria-label="شريط الزمن النبوي" />
@@ -128,14 +116,11 @@
           </div>
         </div>
 
-        <!-- Station Multi-Depth Inspector + Wahi Sync + Past vs Today -->
-        <div class="glass-panel station-inspector" id="station-inspector">
-          <!-- Populated dynamically by js/atlas.js -->
-        </div>
+        <div class="glass-panel station-inspector" id="station-inspector"></div>
       </div>
     </section>
 
-    <!-- VIEW 2B: HIJRAH DAY-BY-DAY & SEERAH KNIGHTS ARENA (STAGE 8) -->
+    <!-- VIEW 2: HIJRAH DAY-BY-DAY & SEERAH KNIGHTS ARENA -->
     <section id="view-hijrah" class="view-section">
       <div class="section-head">
         <div>
@@ -143,14 +128,14 @@
           <p>تتبّع مسار الـ 480 كم السري من مكة إلى قباء مع أدوار خلية الهجرة، ثم اختبر حصيلتك في ميدان الفرسان واجمع الأوسمة الذهبية.</p>
         </div>
         <div class="filter-pills" id="hijrah-quiz-subtabs">
-          <button class="pill-btn active" data-hqmode="hijrah">🐪 مسار الهجرة يوماً بيوم (480 كم)</button>
-          <button class="pill-btn" data-hqmode="quiz">🏆 ميدان فرسان السيرة (12 تحدياً)</button>
+          <button class="pill-btn active" data-hqmode="hijrah">🐪 مسار الهجرة (480 كم)</button>
+          <button class="pill-btn" data-hqmode="quiz">🏆 ميدان الفرسان (12 تحدياً)</button>
         </div>
       </div>
       <div id="hijrah-quiz-stage"></div>
     </section>
 
-    <!-- VIEW 2: TACTICAL BATTLE SIMULATOR -->
+    <!-- VIEW 3: TACTICAL BATTLE SIMULATOR -->
     <section id="view-battles" class="view-section">
       <div class="section-head">
         <div>
@@ -163,10 +148,10 @@
         <div class="glass-panel tactical-board">
           <div class="tactical-svg-box" id="tactical-map-holder"></div>
           <div class="tactical-controls">
-            <div style="display:flex; gap:8px;">
-              <button class="btn-gold" id="battle-play-btn">▶ تشغيل التحريك التكتيكي</button>
-              <button class="btn-outline" id="battle-prev-btn">◀ الخطوة السابقة</button>
-              <button class="btn-outline" id="battle-next-btn">الخطوة التالية ▶</button>
+            <div class="tactical-btn-group">
+              <button class="btn-gold" id="battle-play-btn">▶ تشغيل التحريك</button>
+              <button class="btn-outline" id="battle-prev-btn">◀ السابقة</button>
+              <button class="btn-outline" id="battle-next-btn">التالية ▶</button>
             </div>
             <div class="phase-dots" id="battle-phase-dots"></div>
           </div>
@@ -175,22 +160,22 @@
       </div>
     </section>
 
-    <!-- VIEW 2C: SACRED SANCTUARIES INTERACTIVE BLUEPRINTS (STAGE 11) -->
+    <!-- VIEW 4: SACRED SANCTUARIES INTERACTIVE BLUEPRINTS -->
     <section id="view-sanctuaries" class="view-section">
       <div class="section-head">
         <div>
           <h2>المخطط الهندسي التفاعلي لمعالم الحرمين الشريفين</h2>
-          <p>تجول تفاعلياً داخل عمارة المسجد النبوي الشريف والروضة المباركة والحجرة النبوية، ومعالم الكعبة المشرفة والمطاف.</p>
+          <p>تجوّل تفاعلياً داخل عمارة المسجد النبوي الشريف والروضة المباركة والحجرة النبوية، ومعالم الكعبة المشرفة والمطاف.</p>
         </div>
         <div class="filter-pills" id="sanctuary-subtabs">
-          <button class="pill-btn active" data-site="madinah">🕌 المسجد النبوي والروضة الشريفة</button>
-          <button class="pill-btn" data-site="makkah">🕋 الكعبة المشرفة والمسجد الحرام</button>
+          <button class="pill-btn active" data-site="madinah">🕌 المسجد النبوي والروضة</button>
+          <button class="pill-btn" data-site="makkah">🕋 الكعبة والمسجد الحرام</button>
         </div>
       </div>
       <div id="sanctuaries-stage"></div>
     </section>
 
-    <!-- VIEW 3: IF YOU WERE THERE (SHURA SCENARIOS) -->
+    <!-- VIEW 5: IF YOU WERE THERE (SHURA SCENARIOS) -->
     <section id="view-scenarios" class="view-section">
       <div class="section-head">
         <div>
@@ -204,7 +189,7 @@
       </div>
     </section>
 
-    <!-- VIEW 4: COMPANIONS CONSTELLATION -->
+    <!-- VIEW 6: COMPANIONS CONSTELLATION -->
     <section id="view-constellation" class="view-section">
       <div class="section-head">
         <div>
@@ -227,7 +212,7 @@
       </div>
     </section>
 
-    <!-- VIEW 5: PROPHETIC LINEAGE & SHAMA'IL (STAGE 7) -->
+    <!-- VIEW 7: PROPHETIC LINEAGE & SHAMA'IL -->
     <section id="view-lineage" class="view-section">
       <div class="section-head">
         <div>
@@ -235,15 +220,15 @@
           <p>استكشف الشجرة الذهبية للنسب النبوي الشريف وتلاقي أنساب الصحابة معها، وأبناء وبنات النبي ﷺ، وكيف كان يقضي يومه المبارك.</p>
         </div>
         <div class="filter-pills" id="lineage-subtabs">
-          <button class="pill-btn active" data-submode="tree">🌿 عمود النسب الشريف</button>
+          <button class="pill-btn active" data-submode="tree">🌿 عمود النسب</button>
           <button class="pill-btn" data-submode="household">🏡 أبناء وبنات النبي ﷺ</button>
-          <button class="pill-btn" data-submode="shamail">🕰️ يوم في حياة النبي ﷺ</button>
+          <button class="pill-btn" data-submode="shamail">🕰️ يوم في حياته ﷺ</button>
         </div>
       </div>
       <div id="lineage-dynamic-stage"></div>
     </section>
 
-    <!-- VIEW 5B: SAHABA AUDIO DIWAN & SEERAH LEXICON (STAGE 13) -->
+    <!-- VIEW 8: SAHABA AUDIO DIWAN & SEERAH LEXICON -->
     <section id="view-diwan" class="view-section">
       <div class="section-head">
         <div>
@@ -251,35 +236,35 @@
           <p>استمع لإلقاء عربي فصيح (بدون موسيقى) لأروع القصائد الموثقة في حضرة النبي ﷺ مع تظليل متزامن للأبيات، واستكشف معجم مواضع وألفاظ السيرة.</p>
         </div>
         <div class="filter-pills" id="diwan-lex-subtabs">
-          <button class="pill-btn active" data-dlmode="diwan">🎙️ ديوان القصائد الصحابية (صوتي)</button>
-          <button class="pill-btn" data-dlmode="lexicon">📖 معجم الأماكن وغريب السيرة (18)</button>
+          <button class="pill-btn active" data-dlmode="diwan">🎙️ ديوان القصائد (صوتي)</button>
+          <button class="pill-btn" data-dlmode="lexicon">📖 معجم السيرة (18)</button>
         </div>
       </div>
       <div id="diwan-lexicon-stage"></div>
     </section>
 
-    <!-- VIEW 6: PRACTICAL PROPHETIC GUIDANCE (STAGE 10) -->
+    <!-- VIEW 9: PRACTICAL PROPHETIC GUIDANCE -->
     <section id="view-guidance" class="view-section">
       <div class="section-head">
         <div>
           <h2>الهدي النبوي التطبيقي لحياتك اليوم</h2>
           <p>حوّل معرفة السيرة إلى سلوك حي: قواعد نبوية موثقة في السكينة النفسية، فن التعامل، القيادة والإتقان، والعافية البدنية.</p>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-          <span class="progress-pill" id="sunnah-applied-counter">🌟 سنن عملية طبّقتها اليوم: 0 من 10</span>
+        <div class="guidance-head-controls">
+          <span class="progress-pill" id="sunnah-applied-counter">🌟 سنن مطبّقة اليوم: 0 من 10</span>
           <div class="filter-pills" id="guidance-filters">
             <button class="pill-btn active" data-gcat="all">الكل (10)</button>
-            <button class="pill-btn" data-gcat="psych">🌱 السكينة النفسية</button>
+            <button class="pill-btn" data-gcat="psych">🌱 السكينة</button>
             <button class="pill-btn" data-gcat="social">🤝 بناء القلوب</button>
-            <button class="pill-btn" data-gcat="leadership">⚖️ القيادة والإتقان</button>
-            <button class="pill-btn" data-gcat="health">🍯 العافية والطب النبوي</button>
+            <button class="pill-btn" data-gcat="leadership">⚖️ القيادة</button>
+            <button class="pill-btn" data-gcat="health">🍯 العافية</button>
           </div>
         </div>
       </div>
       <div id="guidance-grid-holder"></div>
     </section>
 
-    <!-- VIEW 7: 3D PROPHETIC MUSEUM -->
+    <!-- VIEW 10: 3D PROPHETIC MUSEUM -->
     <section id="view-museum" class="view-section">
       <div class="section-head">
         <div>
@@ -290,7 +275,7 @@
       <div class="museum-grid" id="museum-grid"></div>
     </section>
 
-    <!-- VIEW 8: 30-DAY KHATMAH & PERSONALIZED GOLDEN CERTIFICATE (STAGE 12) -->
+    <!-- VIEW 11: 30-DAY KHATMAH & PERSONALIZED GOLDEN CERTIFICATE -->
     <section id="view-khatmah" class="view-section">
       <div class="section-head">
         <div>
@@ -306,17 +291,27 @@
     </section>
   </main>
 
-  <!-- Mobile Bottom Dock -->
+  <!-- Official Developer Attribution Footer -->
+  <footer class="developer-footer">
+    <a href="https://elkatebmohamadsalah.blogspot.com/?m=1#google_vignette"
+       target="_blank" rel="noopener noreferrer"
+       class="developer-credit-btn dev-credit-link">
+      <span>✨</span>
+      <span>تم التطوير بواسطة محمد صلاح عبد الخالق</span>
+      <span class="dev-arrow">↗</span>
+    </a>
+  </footer>
+
+  <!-- Ergonomic Mobile Bottom Quick-Access Bar -->
   <nav class="mobile-dock" aria-label="التنقل السريع للهاتف">
     <button class="dock-btn active" data-view="atlas"><span>🗺️</span><span>الأطلس</span></button>
-    <button class="dock-btn" data-view="hijrah"><span>🐪</span><span>الهجرة</span></button>
     <button class="dock-btn" data-view="battles"><span>⚔️</span><span>الغزوات</span></button>
     <button class="dock-btn" data-view="diwan"><span>🎙️</span><span>الديوان</span></button>
-    <button class="dock-btn" data-view="constellation"><span>✨</span><span>الصحابة</span></button>
     <button class="dock-btn" data-view="khatmah"><span>🏅</span><span>الختمة</span></button>
+    <button class="dock-btn" id="mobile-settings-btn" type="button"><span>⚙️</span><span>الإعدادات</span></button>
   </nav>
 
-  <!-- Modal for Detailed Document Inspection -->
+  <!-- Universal Responsive Modal / Sheet -->
   <div class="modal-backdrop" id="relic-modal">
     <div class="glass-panel modal-card" id="relic-modal-content"></div>
   </div>
@@ -346,6 +341,7 @@
   <script src="js/museum.js"></script>
   <script src="js/poster.js"></script>
   <script src="js/khatmah-cert.js"></script>
+  <script src="js/settings-updater.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

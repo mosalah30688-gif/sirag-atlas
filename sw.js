@@ -1,7 +1,8 @@
-const CACHE_NAME = 'sirag-atlas-stage-14';
+const CACHE_NAME = 'sirag-atlas-stage-15';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './version.json',
   './css/styles.css',
   './assets/seal.svg',
   './assets/icon-192.png',
@@ -33,6 +34,7 @@ const CORE_ASSETS = [
   './js/museum.js',
   './js/poster.js',
   './js/khatmah-cert.js',
+  './js/settings-updater.js',
   './js/app.js',
   './assets/audio/poems/hassan-madh.mp3',
   './assets/audio/poems/kaab-zuhayr.mp3',
@@ -59,6 +61,14 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
+  // Always fetch live repository update checks directly from GitHub without SW cache
+  const url = event.request.url || '';
+  if (url.includes('api.github.com') || url.includes('raw.githubusercontent.com')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((res) => {

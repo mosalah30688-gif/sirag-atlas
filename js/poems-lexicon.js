@@ -115,11 +115,10 @@
               ${p.verses
                 .map(
                   (v, vIdx) => `
-                  <div class="poem-couplet" data-vidx="${vIdx}"
-                       style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; padding:14px 18px; border-radius:14px; background:rgba(15,26,44,0.62); border:1px solid var(--border-subtle); transition:all 0.3s ease; font-family:var(--font-serif); font-size:1.28rem;">
-                    <span style="text-align:left;">${v.sadr}</span>
+                  <div class="poem-couplet" data-vidx="${vIdx}">
+                    <span class="sadr-cell">${v.sadr}</span>
                     <span style="color:var(--gold-primary); font-size:0.95rem;">✦</span>
-                    <span style="text-align:right;">${v.ajuz}</span>
+                    <span class="ajuz-cell">${v.ajuz}</span>
                   </div>
                 `
                 )

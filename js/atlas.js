@@ -379,7 +379,7 @@
             <h3 class="inspector-title">${ev.title}</h3>
             <p style="font-size:0.83rem; color:var(--text-secondary); margin-top:4px;">📍 ${ev.locationName}</p>
           </div>
-          <div style="display:flex; gap:6px; flex-shrink:0;">
+          <div class="inspector-actions-row">
             <button class="btn-outline ${window.SiragOmni?.isBookmarked(ev.id) ? 'active' : ''}" id="toggle-bookmark-btn" title="حفظ المحطة في مفضلتي" style="font-size:0.78rem; padding:7px 10px;">
               ${window.SiragOmni?.isBookmarked(ev.id) ? '🔖 محفوظة' : '🔖 حفظ'}
             </button>

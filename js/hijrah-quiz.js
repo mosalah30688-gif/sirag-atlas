@@ -160,7 +160,7 @@
               <strong style="display:block; color:var(--gold-bright); margin-bottom:9px; font-size:0.92rem;">
                 🕵️‍♂️ خلية التخطيط السرية في الهجرة (تكامل الأدوار):
               </strong>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div class="resp-two-col">
                 ${this.data.team
                   .map(
                     (m) => `
@@ -278,7 +278,7 @@
               <h3 class="inspector-title">رصيدك: ${solvedCount} / ${quiz.length}</h3>
             </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div class="resp-two-col">
               ${this.data.badges
                 .map((b) => {
                   const unlocked = solvedCount >= b.threshold;
